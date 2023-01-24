@@ -59,11 +59,15 @@ const asteroidCollision = (asteroids) => {
     //iterate over the asteroids array 
     for (asteroid of asteroids) {
         //loop while the stack length is not 0 and the asteroid is not less than 0 and 
+        //stack.at(-1) is shorthand for last element in the array
         while (stack.length != 0 && asteroid < 0 && stack.at(-1) > 0) {
+            //calculate difference -> positive or negative
             let diff = asteroid + stack.at(-1);
 
+            //if negative asteroid is larger
             if (diff < 0) {
                 stack.pop();
+                //otherwise if positive asteroid is larger
             } else if (diff > 0) {
                 asteroid = 0;
             } else {
@@ -71,7 +75,7 @@ const asteroidCollision = (asteroids) => {
                 stack.pop();
             }
         }
-
+        
         if (asteroid) {
             stack.push(asteroid);
         }
