@@ -35,8 +35,8 @@ var diameterOfBinaryTree = function(root) {
 
 //sol2 
 
-var diameterOfBinaryTree2 = function(root, max = [0]) {
-    diameterOfTree2(root, max);
+var diameterOfBinaryTree = function(root, max = [0]) {
+    diameterOfTree(root, max);
 
     return max[0];
 };
