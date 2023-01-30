@@ -36,6 +36,33 @@ The number of nodes in the list is sz.
  * @param {number} n
  * @return {ListNode}
  */
+
+//andy g
+
+var removeNthfromEnd = function (head, n) {
+    let dummyHead = new ListNode(-1);
+    dummyHead.next = head;
+    let resultHead = dummyHead;
+    let counter = 0;
+    let tail = head;
+    while (counter < n){
+        count++;
+        tail = tail.next;
+    }
+    let removedNode = head;
+    prev = dummyHead;
+    //increment our tail all the way to null
+    while (tail){
+        tail = tail.next;
+        removedNode = removedNode.next;
+        prev = prev.next;
+    }
+    prev.next  = removedNode.next;
+    return resultHead.next; 
+}
+
+
+
  var removeNthFromEnd = function(head, n) {
     //initialize empty array to store values
     let arr = []
@@ -133,3 +160,4 @@ const moveNode = (curr, length) => {
 
     return curr;
 }
+
