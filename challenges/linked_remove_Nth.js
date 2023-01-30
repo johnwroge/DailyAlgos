@@ -37,17 +37,29 @@ The number of nodes in the list is sz.
  * @return {ListNode}
  */
  var removeNthFromEnd = function(head, n) {
+    //initialize empty array to store values
     let arr = []
+    //creating a dummy node
     let res = new ListNode()
+    //copy dummy node in another variable 
     let copy = res;
+    //iterate over the linked list
     while(head){
+        //push the current value into the array
         arr.push(head.val)
+        //reassign the head to be head.next
         head = head.next;
     }
+    //[1,2,3,4,5], n = 2
+    //iterate over the array
     for(let i =0; i<arr.length;i++){
+        //check if the array length minus i equals n, if so continue
         if(arr.length-i == n) continue;
+        //reassign copy .next to be a new list node with the current element 
         copy.next = new ListNode(arr[i])
+        //reassign copy to be copy.next
         copy = copy.next;
     }
+    //return res.next
     return res.next;
 };
