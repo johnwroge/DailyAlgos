@@ -99,86 +99,86 @@ console.log(reorderList([1,2,3,4]))
 
 //soln2
 
-var reorderList2 = function(head) {
-    // find middle
-	// by moving "fast" twice, we'll have "slow" in the middle
-    let slow = head
-    let fast = head
-    while (fast.next && fast.next.next) {
-        slow = slow.next
-        fast = fast.next.next
-    }
+// var reorderList2 = function(head) {
+//     // find middle
+// 	// by moving "fast" twice, we'll have "slow" in the middle
+//     let slow = head
+//     let fast = head
+//     while (fast.next && fast.next.next) {
+//         slow = slow.next
+//         fast = fast.next.next
+//     }
 
-    // reverse second half
-	// with reverse linked list solution
-    let prev = null
-    let cur = slow.next
-    while (cur) {
-        let temp = cur.next
-        cur.next = prev
-        prev = cur
-        cur = temp
-    }
+//     // reverse second half
+// 	// with reverse linked list solution
+//     let prev = null
+//     let cur = slow.next
+//     while (cur) {
+//         let temp = cur.next
+//         cur.next = prev
+//         prev = cur
+//         cur = temp
+//     }
 
-    slow.next = null
+//     slow.next = null
 
-    // combine two halves
-    let h1 = head
-    let h2 = prev
+//     // combine two halves
+//     let h1 = head
+//     let h2 = prev
 
-    // if even, second half will be smaller
-	while (h2) {
-        let temp = h1.next
-        h1.next = h2
-        h1 = h2
-        h2 = temp
-    }
-};
+//     // if even, second half will be smaller
+// 	while (h2) {
+//         let temp = h1.next
+//         h1.next = h2
+//         h1 = h2
+//         h2 = temp
+//     }
+// };
 
-//neetcode
+// //neetcode
 
-var reorderList = function(head) {
-    const mid = getMid(head);           /* Time O(N) */
-    const reveredFromMid = reverse(mid);/* Time O(N) */
+// var reorderList = function(head) {
+//     const mid = getMid(head);           /* Time O(N) */
+//     const reveredFromMid = reverse(mid);/* Time O(N) */
 
-    reorder(head, reveredFromMid);      /* Time O(N) */
-};
+//     reorder(head, reveredFromMid);      /* Time O(N) */
+// };
 
-const getMid = (head) => {
-    let [ slow, fast ] = [ head, head ];
+// const getMid = (head) => {
+//     let [ slow, fast ] = [ head, head ];
 
-    while (fast && fast.next) {         /* Time O(N) */
-        slow = slow.next;
-        fast = fast.next.next;
-    }
+//     while (fast && fast.next) {         /* Time O(N) */
+//         slow = slow.next;
+//         fast = fast.next.next;
+//     }
 
-    return slow;
-}
+//     return slow;
+// }
 
-const reverse = (head) => {
-    let [ prev, curr, next ] = [ null, head, null ];
+// const reverse = (head) => {
+//     let [ prev, curr, next ] = [ null, head, null ];
 
-    while (curr) {                      /* Time O(N) */
-        next = curr.next;
-        curr.next = prev;
+//     while (curr) {                      /* Time O(N) */
+//         next = curr.next;
+//         curr.next = prev;
 
-        prev = curr;
-        curr = next;
-    }
+//         prev = curr;
+//         curr = next;
+//     }
 
-    return prev;
-}
+//     return prev;
+// }
 
-const reorder = (l1, l2) => {
-    let [ first, next, second ] = [ l1, null, l2 ];
+// const reorder = (l1, l2) => {
+//     let [ first, next, second ] = [ l1, null, l2 ];
 
-    while (second.next) {              /* Time O(N) */
-        next = first.next;
-        first.next = second;
-        first = next;
+//     while (second.next) {              /* Time O(N) */
+//         next = first.next;
+//         first.next = second;
+//         first = next;
 
-        next = second.next;
-        second.next = first;
-        second = next;
-    }
-}
+//         next = second.next;
+//         second.next = first;
+//         second = next;
+//     }
+// }
