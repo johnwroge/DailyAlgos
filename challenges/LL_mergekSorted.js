@@ -38,24 +38,7 @@ Output: []
  * @param {ListNode[]} lists
  * @return {ListNode}
  */
- var mergeKLists = function(lists) {
 
-    //edge case: if lists.length is 0, return empty array
-
-    //create index variable
-    let listNode = "I"
-    //result array
-    let result = [];
-    //dummyNode
-    let dummyNode = new ListNode(-Infinity)
-
-    //iterate over the lists; 
-    for (let i = 0; i < lists.length; i++){
-        
-    }
-
-    
-};
 const mergeKLists = function(lists) {
     const queue = new MinPriorityQueue({ priority: x => x.val })
   
