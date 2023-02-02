@@ -76,7 +76,25 @@ MedianFinder.prototype.findMedian = function() {
             : minHeap
     }
 
-    
+    rebalance ({ maxHeap, minHeap } = this) {
+        const canShiftMax = (minHeap.size() + 1) < maxHeap.size()
+        if (canShiftMax) return minHeap.enqueue(maxHeap.dequeue().element)
+
+        const canShiftMin = maxHeap.size() < minHeap.size()
+        if (canShiftMin) return maxHeap.enqueue(minHeap.dequeue().element)
+    }
+
+    /* Time O(1) | Space (1) */
+    findMedian ({ maxHeap, minHeap } = this) {
+        const isEven = maxHeap.size() === minHeap.size()
+        return (isEven)
+            ? this.average(maxHeap, minHeap)
+            : this.top(maxHeap)
+    }
+
+    average (maxHeap, minHeap) {
+        return (this.top(maxHeap) + this.top(minHeap)) / 2
+    }
 
     top (heap) {
         return heap.front()?.element || 0
