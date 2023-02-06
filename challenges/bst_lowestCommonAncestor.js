@@ -79,16 +79,27 @@ var lowestCommonAncestor2 = function(root, p, q) {
     //create a loop while the root isn't null
     while (root.val){
         //create condtional statement check if p.val and q.val are greater than root.val
-        
+        let isGreater = (p.val > root.val && q.val > root.val);
         //if true ->
+        if (isGreater){
             //reassign the root to be root.right 
+            root = root.right;
             //continue
+            continue; 
+        }
         //create condtional statement check if p.val and q.val are less than root.val
+        let isLess = p.val < root.val && q.val < root.val;
         //if true ->
+        if (isLess){
             //reassign the root to be root.left 
+            root = root.left;
             //continue
+            continue;
+        }
         //otherwise if neither -> break out of while loop
+        break; 
     }
 //return the current root
+return root; 
 
 }
