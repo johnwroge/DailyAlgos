@@ -74,3 +74,21 @@ p and q will exist in the BST.
 
 //T O(N) S O(1)
 
+var lowestCommonAncestor2 = function(root, p, q) {
+
+    //create a loop while the root isn't null
+    while (root.val){
+        //create condtional statement check if p.val and q.val are greater than root.val
+        
+        //if true ->
+            //reassign the root to be root.right 
+            //continue
+        //create condtional statement check if p.val and q.val are less than root.val
+        //if true ->
+            //reassign the root to be root.left 
+            //continue
+        //otherwise if neither -> break out of while loop
+    }
+//return the current root
+
+}
