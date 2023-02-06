@@ -50,22 +50,36 @@ All elements of candidates are distinct.
 
 //leetcode soln 1
  var combinationSum = function(candidates, target) {
+    //declare an empty array result
     let res = []
+    //declare second empty array temporary 
     let temp = []
+    //create a helper function that takes an index and sum 
     let iterate = (index,sum)=>{
+        //base case: if sum is greater than target return
         if(sum>target) return;
+        //base case: if sum matches target
         if(sum == target){
+            //push the temporary contents into result array
             res.push([...temp])
+            //return 
             return;
         }
+        //iterate over the candidates array
         for(let i =index; i<candidates.length;i++){
+            //check if the element at the current index is greater than target, if true continue
             if(candidates[i]>target)continue
+            //push the current element into the temporary array
             temp.push(candidates[i])
+            //recursive call: call iterate with the current index, initial sum plus current element
             iterate(i, sum+candidates[i])
+            //remove the last element in the temp array
             temp.pop()
         }
     }
+    //call helper function with index of 0 and sum of 0
     iterate(0,0)
+    //return the final result
     return res;
 };
 
