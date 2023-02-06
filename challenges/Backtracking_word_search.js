@@ -37,3 +37,12 @@ n = board[i].length
 board and word consists of only lowercase and uppercase English letters.
 
 */
+
+/**
+ * @param {character[][]} board
+ * @param {string} word
+ * @return {boolean}
+ */
+ var exist = function(board, word) {
+    
+};
