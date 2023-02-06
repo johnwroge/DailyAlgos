@@ -54,12 +54,23 @@ p and q will exist in the BST.
  * @param {TreeNode} q
  * @return {TreeNode}
  */
+
+//T O(n) S O(H) 
  var lowestCommonAncestor = function(root, p, q) {
+    //create a conditional variable checking if the p.val is less than root.val AND q.val is less than root.val
     const isGreater = (p.val < root.val) && (q.val < root.val);
+    //if this conditional variable is true, 
+        //return the recursive call to the original function with root.left, p, and q
     if (isGreater) return lowestCommonAncestor(root.left, p, q);
 
+    //create a conditional statement checking if p.val and q.val are greater than root.val
     const isLess = (root.val < p.val) && (root.val < q.val);
+    //if condtional is true, return recursive call to original function with root.right, p and q
     if (isLess) return lowestCommonAncestor(root.right, p, q);
 
+    //return the current root
     return root;
 };
+
+//T O(N) S O(1)
+
