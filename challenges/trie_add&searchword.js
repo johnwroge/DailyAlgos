@@ -59,7 +59,7 @@ WordDictionary.prototype.addWord = function(word) {
     //for the last character assign the this,isWord property to true
     this.n[word[i]].isWord = true; 
     }
-    //return true/this/something?
+   
 };
 
 /** 
