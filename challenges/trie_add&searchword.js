@@ -66,9 +66,50 @@ WordDictionary.prototype.addWord = function(word) {
  * @param {string} word
  * @return {boolean}
  */
-WordDictionary.prototype.search = function(word) {
-    
+//use recursive method to search through the word
+    //use default params start (index at 0), newCurrent to be null
+WordDictionary.prototype.search = function(word, start = 0, newCurr = null) {
+    //initialize this value to be current
+    let curr = this;
+    //check if current is not null
+    if (newCurr != null)
+    //than assign the current variable to be the newCurr (default param)
+        curr = newCurr;
+    for (let i = start; i < word.length; i++) {
+        //initialize a character to be the char at the current index
+        let char = word[i];
+        //if the char is a period
+        if (char == '.') {
+            //assign the letters to be the keys in the current object in constructor
+            let letters = Object.keys(curr.n);
+            //create a result variable to be false
+            let res = false;
+            //iterate over the letters from keys in object
+            for (let letter of letters) {
+                //reassign result to be either result, or the recursive call with updated
+                //params -> word, increment index, and the current character curr.n[letter]
+                res = res || this.search(word, i + 1, curr.n[letter]);
+            }
+            //return the result
+            return res;
+            //base case: otherwise if the character doesn't exist, return false
+        } else if (!curr.n[char]) {
+            return false;
+        }
+        //reassign current to be the current at char of constructor object
+        curr = curr.n[char];
+    }
+    //if you didn't return false, the word is present and you can return true; 
+    return curr.isWord;
 };
+
+/** 
+ * Your WordDictionary object will be instantiated and called as such:
+ * var obj = new WordDictionary()
+ * obj.addWord(word)
+ * var param_2 = obj.search(word)
+ */
+
 
 /** 
  * Your WordDictionary object will be instantiated and called as such:
