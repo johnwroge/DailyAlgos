@@ -93,19 +93,19 @@ A solution set is:
 const generateCombinations = (nums, target) => {
   const subsets = [];
   const curr = [];
-  const processSubset = (target, index) => {
-    if (target === 0) {
-      subsets.push(curr.slice());
-      return;
+    const processSubset = (target, index) => {
+        if (target === 0) {
+          subsets.push(curr.slice());
+          return;
+        }
+      if (nums[index] > target || index === nums.length) return;
+      curr.push(nums[index]);
+      processSubset(target - nums[index], index);
+      curr.pop();
+      processSubset(target, index + 1);
     }
-    if (nums[index] > target || index === nums.length) return;
-    curr.push(nums[index]);
-    processSubset(target - nums[index], index);
-    curr.pop();
-    processSubset(target, index + 1);
-  }
-  processSubset(target, 0);
-  return subsets;
-};
+    processSubset(target, 0);
+    return subsets;
+  };
 
 module.exports = {subsetSumClosest, generateCombinations};
