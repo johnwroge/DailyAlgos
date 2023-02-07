@@ -35,7 +35,10 @@ wordDictionary.search("b.."); // return True
 */
 
 var WordDictionary = function() {
-    
+    //need a way to keep track of characters
+    this.n = {};
+    this.isWord = false; 
+    return this;   
 };
 
 /** 
@@ -43,6 +46,15 @@ var WordDictionary = function() {
  * @return {void}
  */
 WordDictionary.prototype.addWord = function(word) {
+
+    //initialize current to this
+    
+    //iterate over word 
+        //check if the character does not exist in this.n
+            //if not, create a new word dictionary for this character in this.
+        
+    //for the last character assign the this,isWord property to true
+
     
 };
 
