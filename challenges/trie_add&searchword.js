@@ -48,14 +48,18 @@ var WordDictionary = function() {
 WordDictionary.prototype.addWord = function(word) {
 
     //initialize current to this
-    
-    //iterate over word 
+    let current = this;
+    //iterate over word
+    for (let i = 0; i < word.length; i++){ 
         //check if the character does not exist in this.n
+        if (!this.n[word[i]]){
             //if not, create a new word dictionary for this character in this.
-        
+            this.n[word[i]] = new WordDictionary(word[i]);
+        }
     //for the last character assign the this,isWord property to true
-
-    
+    this.n[word[i]].isWord = true; 
+    }
+    //return true/this/something?
 };
 
 /** 
