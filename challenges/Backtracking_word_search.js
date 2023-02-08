@@ -44,5 +44,27 @@ board and word consists of only lowercase and uppercase English letters.
  * @return {boolean}
  */
  var exist = function(board, word) {
-    
+
+    //create a grid to keep track if current letter has been visited
+    const seen = board.map(row => row.map(col => false))
+    //iterate over the board
+    for (let row = 0; row < board.length; row++){
+        for (let col = 0; col < board[0].length; col++){
+
+            if (board[row][col] === word[0]){
+                dfs(board, seen, row, col);
+            }
+
+        }
+    }
 };
+
+const dfs = (board, seen, row, col) => {
+
+    //base case: if board[row][col] is undefined 
+
+
+}
+
+
+//neetcode
