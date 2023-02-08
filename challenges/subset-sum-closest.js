@@ -43,7 +43,7 @@ const subsetSumClosest = (nums, target) => {
     process(target, index + 1);
   }
   //call helper function with initial starting values
-portion (target, 0)
+process (target, 0)
 //return the final minimum difference
 return minDiff;
 
