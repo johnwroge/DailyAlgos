@@ -48,19 +48,42 @@ board and word consists of only lowercase and uppercase English letters.
     //iterate over the board
     for (let row = 0; row < board.length; row++){
         for (let col = 0; col < board[0].length; col++){
-
             //invoke helper function with the board, the word, row index, col index, and 0 
-            
-
+            if (dfs1(board, word, row, col, 0)) return true; 
         }
     }
+    return false; 
 };
 
-const dfs1 = (board, seen, row, col) => {
+const dfs1 = (board, word, row, col, index) => {
 
-    //base case: if board[row][col] is undefined 
-
-
+    //base case: matching condition is where the index matches the word length 
+        //return true
+    if (index === word.length) return true;
+    //base case: if current row or col is invalid (out of bounds),
+    // or current character in the board does not match the word
+        //return false; 
+    if (row < 0 || col < 0 || row >= board.length || col >= board[0].length || word[index] !== board[row][col]){
+        return false; 
+    }
+    //recursive case: 
+        //if the current character in the board matches the word
+    if (board[row][col] === word[index]){
+            //store the current character of board in a variable
+            let temp = board[row][col];
+            //reassign the current character to be a symbol "#"
+            board[row][col] = "#";
+            //return dfs1 with updated params 
+            if (
+                dfs1(board, word, row + 1, col, index + 1) ||
+                dfs1(board, word, row - 1, col, index + 1) ||
+                dfs1(board, word, row, col + 1, index + 1) ||
+                dfs1(board, word, row, col - 1, index + 1)  
+            ) return true;
+            //either row + 1, row - 1, col + 1, col - 1 is true
+    }
+        //reassign the character in the board to be the store character
+    board[row][col] = temp; 
 }
 
 
