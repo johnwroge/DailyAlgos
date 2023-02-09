@@ -43,23 +43,20 @@ board and word consists of only lowercase and uppercase English letters.
  * @param {string} word
  * @return {boolean}
  */
- var exist = function(board, word) {
+ var exist1 = function(board, word) {
 
-    //create a grid to keep track if current letter has been visited
-    const seen = board.map(row => row.map(col => false))
     //iterate over the board
     for (let row = 0; row < board.length; row++){
         for (let col = 0; col < board[0].length; col++){
 
-            if (board[row][col] === word[0]){
-                dfs(board, seen, row, col);
-            }
+            //invoke helper function with the board, the word, row index, col index, and 0 
+            
 
         }
     }
 };
 
-const dfs = (board, seen, row, col) => {
+const dfs1 = (board, seen, row, col) => {
 
     //base case: if board[row][col] is undefined 
 
@@ -114,3 +111,37 @@ const directions = (row, col) => ({
     left: [row, col - 1,],
     right: [row, col + 1]
 })
+
+//soln2 leetcode
+
+/**
+ * @param {character[][]} board
+ * @param {string} word
+ * @return {boolean}
+ */
+ var exist = function(board, word) {
+    for (var i = 0; i < board.length; i++) {
+        for (var j = 0; j < board[0].length; j++) {
+            if (existHelper(board, word, i, j, 0)) return true;
+        }
+    }
+
+    return false;
+};
+
+// if the word[k] existing in board, keep searching up, down, left, right 
+var existHelper = function(board, word, i, j, k) {
+    if (k === word.length) return true;
+    if (i < 0 || j < 0 || i > board.length - 1 || j > board[0].length - 1) return false;
+    if (board[i][j] === word[k]) {
+        var tmp = board[i][j];
+        board[i][j] = '#';
+        if (existHelper(board, word, i + 1, j, k + 1) ||
+            existHelper(board, word, i - 1, j, k + 1) ||
+            existHelper(board, word, i, j + 1, k + 1) ||
+            existHelper(board, word, i, j - 1, k + 1)) {
+              return true;
+        }
+        board[i][j] = tmp;
+    }
+};
