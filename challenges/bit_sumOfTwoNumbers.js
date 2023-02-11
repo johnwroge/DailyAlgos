@@ -22,3 +22,28 @@ Constraints:
 
 -1000 <= a, b <= 1000
 */
+
+/**
+ * @param {number} a
+ * @param {number} b
+ * @return {number}
+ */
+// var getSum = function(a, b) {
+//     let carry;
+//     while (b !== 0){
+//         carry = (a & b) << 1;
+//         a = a ^ b;
+//         b = carry;
+//     } 
+//     return a; 
+// };
+
+var getSum = (a,b) => {
+    let carry;
+    while(a !== 0){
+        carry = a & b;
+        b = a ^ b;
+        a = carry << 1; 
+    }
+    return b; 
+}
