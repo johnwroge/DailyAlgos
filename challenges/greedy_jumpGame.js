@@ -46,26 +46,167 @@ Constraints:
 
 //question: what if first index in array is a 0
 
+//DP: Top Down left to right S:O(n) TO(n2)
  var canJump = function(nums, index = 0, cache = {}) {
 
-    console.log(index)
+    //create a memo array to store position's capability
 
-    let maxJump = nums[index];
+    //create a helper function that takes one index to iterate over the nums array
 
-    //base case: if current index is nums.length - 1
-    if (index >= nums.length - 1) return true;
-        //return true
+        //base case: check if idx value is good -> return true
+        //base case: check if idx value is bad - return false
+        //calculate max jump
+
+        //iterate over the array starting at idx + 1
+            //invoke helper function for each index and store in variable
+
+            //check if variable is true
+                //change the index to "good"
+                //return true
+            //outside of loop, change idx to 'false'    
+            //return false;
+
+    //return the helper function with first index 
     
-    //base case: if the maxJump already exists
-        //return false
-    if (cache[index] || nums[index] === 0) return false; 
-
-    //recursive case: 
-    while (maxJump > 0){
-        cache[index] = true; 
-        return canJump(nums, index + maxJump, cache);
-        maxJump--; 
-    }
 };
 
+//DP: Bottom Up (right to left) same space and time, but a little faster 
+
+//greedy OPTIMAL:
+
+function jumpGame (nums){
+
+    //create a variable to store max jump or goal
+    let goal = nums.length - 1; 
+    //iterate over the nums array starting at 2nd last element
+    for (let i = nums.length - 2; i >= 0; i--){
+        //check if the 2nd last element plus i is greater than or eqaul to maxJump/goal
+        if (nums[i] + i >= goal){
+        //if true -> reassign maxjump to be the current i value
+            goal = i;
+        }
+    }
+//return conditional checking if nums[0] is 0 
+return goal === 0; 
+}
+
+
+
+
+
+
+
+var canJumpGreedy = function(nums) {
+
+    //store last index in variable maxJump
+    let maxJump = nums.length - 1; 
+    //iterate starting at 2nd last element
+    for (let i = nums.length - 2; i >= 0; i--){
+        //check if i + nums[i] >= maxJump
+        if (i + nums[i] >= maxJump){
+        //if true, reassing maxjump to be i
+        maxJump = i;
+        }
+    }
+ //return conditional checking if maxjump is 0
+ return maxJump === 0; 
+}
 console.log(canJump([2,5,0,0]))
+
+/**
+ * Time O(2^N) | Space O(N)
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+ var canJump = (nums, index = 0) => {
+    const isBaseCase = index === nums.length - 1;
+    if (isBaseCase) return true;
+
+    const furthestJump = Math.min(index + nums[index], (nums.length - 1));
+    for (let nextIndex = (index + 1); nextIndex <= furthestJump; nextIndex++) {
+        if (canJump(nums, nextIndex)) return true;
+    }
+
+    return false;
+}
+
+/**
+ * Time O(N^2) | Space O(N)
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+var canJump = (nums) => {
+    const memo = new Array(nums.length).fill(0);
+    memo[memo.length - 1] = 1;
+    
+    return canJumpFromIndex(nums, memo);
+}
+
+const canJumpFromIndex = (nums, memo, index = 0) => {
+    if (memo[index] !== 0) return memo[index] === 1;
+
+    const furthestJump = Math.min(index + nums[index], nums.length - 1);
+    for (let nextIndex = (index + 1); nextIndex <= furthestJump; nextIndex++) {
+        if (!canJumpFromIndex(nums, memo, nextIndex)) continue
+
+        memo[index] = 1;
+        return true;
+    }
+
+    memo[index] = -1;
+    return false;
+}
+
+/**
+ * Time O(N^2) | Space O(N)
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+var canJump = (nums) => {
+    const memo = new Array(nums.length).fill(0)
+    memo[memo.length - 1] = 1;
+
+    for (let i = (nums.length - 2); 0 <= i; i--) {
+        const furthestJump = Math.min(i + nums[i], nums.length - 1);
+        for (let j = (i + 1); j <= furthestJump; j++) {
+            const isGood = memo[j] === 1
+            if (isGood) { memo[i] = 1; break; }
+        }
+    }
+
+    return memo[0] === 1;
+}
+
+/**
+ * Time O(N) | Space O(1)
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+var canJump = (nums, max = 0, index = 0) => {
+    while (index < nums.length) {
+        const num = nums[index]
+        const jumps = num + index
+        
+        const canNotReachEnd = max < index
+        if (canNotReachEnd) return false
+        
+        max = Math.max(max, jumps)
+        index++
+    }
+
+    return true
+}
+
+/**
+ * Time O(N) | Space O(1)
+ * @param {number[]} nums
+ * @return {boolean}
+ */
+var canJump = (nums, right = nums.length - 1) => {
+    for (let i = right; 0 <= i; i--) {
+        const isJumpable = right <= (i + nums[i])
+        if (isJumpable) right = i;
+    }
+
+    return right === 0;
+}
