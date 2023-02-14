@@ -42,5 +42,8 @@ const houseRobber = (nums) => {
 //return max 2
 return rob2; 
 }
-
 console.log(houseRobber([2,1,1,2]))
+/*
+current: 
+
+*/

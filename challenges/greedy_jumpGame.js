@@ -72,7 +72,7 @@ Constraints:
 
 //DP: Bottom Up (right to left) same space and time, but a little faster 
 
-//greedy OPTIMAL:
+//greedy OPTIMAL SOLUTION:
 
 function jumpGame (nums){
 
