@@ -33,23 +33,26 @@ Output: 3
  * @param {number[]} nums
  * @return {number}
  */
- var rob = function(nums) {
 
-    //create a rob2 variable assign to 0 
+var houserRobber2 = (nums) => {
+
+    if (nums.length < 4){
+        return Math.max(...nums)
+    }
     
-    //create rob1 variable assign to 0
+    return Math.max(rob(nums, 0, nums.length - 1), rob(nums, 1, nums.length))
 
-    //create a current 
+}
 
-    //iterate over the nums array
+ var rob = function(nums, id1, id2) {
+    let [rob1, rob2] = [0, 0];
+    for (let i = id1; i < id2; i++){
+        let current = Math.max(rob1 + nums[i], rob2);
+        rob1 = rob2;
+        rob2 = current;
+    }
+    return rob2; 
+ }
+ 
+ console.log(houserRobber2([1,2,3,1]))
 
-
-        //assign the current to be the max of either the current element plus rob1, or rob2 
-
-        //reassign rob1 to be rob2
-
-        //reassign rob2 to be the current
-
-    
-    //return the maximum variable
-};
