@@ -32,7 +32,6 @@ After sorting, think about how to merge the intervals together.
         
         //sort the array of arrays by first index
         intervals.sort((a, b) => a[0] - b[0]);
-        
         //initialize results array
         const result = [];
         //initialize previous array to be the first array in intervals
@@ -59,21 +58,28 @@ After sorting, think about how to merge the intervals together.
       };
 
 const mergeIntervalReduce = (intervals) => {
-
   //create an array to store output
   const mergedIntervals = [];
   //sort the intervals array by the first index
   intervals.sort((a,b) => a[0] - b[0])
   //push the evaluated result of invoking the reduce function on the array
     mergedIntervals.push(
+      
         intervals.reduce((acc,curr) => {
+
+          //check if the current first element is greater than previous second el
           if (curr[0] > acc[1]){
+            //if true push into the results array
             mergedIntervals.push(acc);
+            //return the current variable
             return curr
           }
+          //check if the current 2nd element is greater than acc 2nd element
           if (curr[1] > acc[1]){
+            //reassign acc 2nd value to be current 2nd value
             acc[1] = curr[1];
           }
+          //return the accumulator 
           return acc;
         })
     )
@@ -82,5 +88,5 @@ return mergedIntervals;
 
 
 //mergeRanges([[0, 1], [3, 5], [4, 8], [10, 12], [9, 10]])
-console.log(mergeRanges([[8, 10], [15, 18], [1, 3], [2, 6]]))
+console.log(mergeIntervalReduce([[8, 10], [15, 18], [1, 3], [2, 6]]))
 module.exports = {mergeRanges};
