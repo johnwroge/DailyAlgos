@@ -58,6 +58,28 @@ After sorting, think about how to merge the intervals together.
         return result;
       };
 
+const mergeIntervalReduce = (intervals) => {
+
+  //create an array to store output
+  const mergedIntervals = [];
+  //sort the intervals array by the first index
+  intervals.sort((a,b) => a[0] - b[0])
+  //push the evaluated result of invoking the reduce function on the array
+    mergedIntervals.push(
+        intervals.reduce((acc,curr) => {
+          if (curr[0] > acc[1]){
+            mergedIntervals.push(acc);
+            return curr
+          }
+          if (curr[1] > acc[1]){
+            acc[1] = curr[1];
+          }
+          return acc;
+        })
+    )
+return mergedIntervals; 
+}
+
 
 //mergeRanges([[0, 1], [3, 5], [4, 8], [10, 12], [9, 10]])
 console.log(mergeRanges([[8, 10], [15, 18], [1, 3], [2, 6]]))

@@ -210,3 +210,17 @@ var canJump = (nums, right = nums.length - 1) => {
 
     return right === 0;
 }
+
+
+const canJump = (nums) => {
+
+   //create a goal parameter corresponding to the length of the array
+
+   //iterate starting at 2nd last index, decrementing by 1, while i>= 0
+    //check if the current index + the current element is greater than or equal to the goal
+        //if true, reassign goal to be this index
+
+    //return a conditional checking if goal is 0
+
+
+}
