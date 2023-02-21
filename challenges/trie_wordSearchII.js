@@ -92,7 +92,7 @@ All the strings of words are unique.
          if(i < 0 || i >= board.length || j < 0 || j >= board[0].length || !node[board[i][j]] || visited.has(`${i} ${j}`)){
              return
          }
-         //the the two indices to the visited set 
+         //add the two indices to the visited set 
          visited.add(`${i} ${j}`)
          //add the current board value to the subresult (string)
          subResult += board[i][j]
