@@ -42,8 +42,9 @@ All the strings of words are unique.
  * @return {string[]}
  */
  var findWords = function(board, words) {
+    //create a result array and tree object
     const res = [], trie = {};
-    
+    //iterate
     for (let word of words) {
       let curNode = trie;
       for (let char of word) {
