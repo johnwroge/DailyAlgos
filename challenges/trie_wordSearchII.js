@@ -46,68 +46,85 @@ All the strings of words are unique.
  const endWord = '*'
 
  //Solution 1
+ //create trie class
  class Trie{
+    //constructor function should take a words parameter
      constructor(words){
+        //create a root property and assign to an empty object
          this.root = {}
+         //create a isWord property and initialize to false (bool)
          this.isWord = false
+         //iterate over the words param, and for each word invoke the addWord helper function passing in the word as arg
          words.forEach(word => this.addWord(word))
      }
-     
+     //create an addWord method that takes a word as a parameter
      addWord(word){
+        //initiaze a current variable to this.root
          let current = this.root
-         
+         //iterate over the each letter of the word
          for(const letter of word){
+            //check if the current variable does not contain a key of the letter
              if(!current[letter]){
+                //if true, create a key of letter and a value of the empty object
                  current[letter] = {}
              }
+             //reassign the current variable to be the newly created value in the current object
              current = current[letter]   
          }
+         //outside of the loop, for the last letter update the isWord property to be true
          current.isWord = true
      }
      
  }
  
- 
+ //create a helper function called findwords that takes a board and a words param
  var findWords = function(board, words) {
+    //create a new instance of a trie passing in the words into the constructor function
      const trie = new Trie(words)
+     //create a result variable and assign to a new instance of a Set
      const result = new Set()
-     
+     //create a visited argument and assign to a new instance of a Set
      const visited = new Set()
      
+     //create a dfs helper function that takes two indices (i, j), a node, and a subresult
      const dfs = (i, j, node, subResult) => {
          //base cases: out of bounds, letter does not exist in next prefix
          if(i < 0 || i >= board.length || j < 0 || j >= board[0].length || !node[board[i][j]] || visited.has(`${i} ${j}`)){
              return
          }
-         
+         //the the two indices to the visited set 
          visited.add(`${i} ${j}`)
+         //add the current board value to the subresult (string)
          subResult += board[i][j]
-         
+         //reassign the node to be the value at the key of the current character in the node object
          node = node[board[i][j]]
-         
+         //check if the isword property on the node is truthy
          if(node.isWord){
+            //if true, add the subresult to the result
              result.add(subResult)    
          }
-         
+         //recursive cases: invoke the dfs helper function four times for each direction (node and subResult are passed)
          dfs(i, j+1, node, subResult)
          dfs(i, j-1, node, subResult)
          dfs(i-1, j, node, subResult)
          dfs(i+1, j, node, subResult)
          
-         
+         //once the recursive calls return, delete the current indices from the visted set (set.delete function)
          visited.delete(`${i} ${j}`)
          
      }
-     
+     //iterate over the row and column of the board
      for(let i = 0; i < board.length; i++){
          for(let j = 0; j < board[0].length; j++){
+            //check if the current board character exists as a key in the trie.root object
              if(trie.root[board[i][j]]){
+                //if yes, invoke the dfs helper function with the current indices, the trie root and an empty string
                  dfs(i, j, trie.root, "")
              }
          }
      }
      
-     
+     //return the result spread into an array
      return [...result]
  
  };
