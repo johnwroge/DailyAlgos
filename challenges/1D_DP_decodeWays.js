@@ -46,3 +46,23 @@ Explanation: "06" cannot be mapped to "F" because of the leading zero ("6" is di
  var numDecodings = function(s) {
     
 };
+
+var numDecodings = function(s) {
+    if (s[0] === '0') return 0;
+    const memo = new Array(s.length);
+    memo[s.length] = 1;
+    
+    for (let i = s.length - 1; i >= 0; i--) {
+        if (s[i] !== '0') {
+            memo[i] = memo[i + 1];
+            
+            if (s[i] === '1' || (s[i] === '2' && s[i+1] < '7')) {
+                memo[i] += memo[i + 2] || 0;
+            }
+        } else {
+            memo[i] = 0;
+        }
+    }
+    
+    return memo[0] || 0;
+};
