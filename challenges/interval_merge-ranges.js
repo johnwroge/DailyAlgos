@@ -64,9 +64,7 @@ const mergeIntervalReduce = (intervals) => {
   intervals.sort((a,b) => a[0] - b[0])
   //push the evaluated result of invoking the reduce function on the array
     mergedIntervals.push(
-      
         intervals.reduce((acc,curr) => {
-
           //check if the current first element is greater than previous second el
           if (curr[0] > acc[1]){
             //if true push into the results array
@@ -87,6 +85,36 @@ return mergedIntervals;
 }
 
 
-//mergeRanges([[0, 1], [3, 5], [4, 8], [10, 12], [9, 10]])
-console.log(mergeIntervalReduce([[8, 10], [15, 18], [1, 3], [2, 6]]))
+//inputs: a 2D array of intervals (arrays)
+//outputs: a new 2D array containing the merged intervals
+
+// [1,6] [2,6] [5,7] 
+
+// [1,7] 
+
+const merge = (intervals) => {
+  //sort the intervals array
+  intervals.sort((a,b) => a[0] - b[0])
+  //create an array to store the output
+  const merged = [];
+  //initialize a j index to 0
+  let previous = intervals[0];
+  //iterate over the intervals array with a for loop starting with 1
+  for (let i = 1; i < intervals.length; i++){
+    if (previous[1] >= intervals[i][0]){
+      previous[1] = Math.max(previous[1], intervals[i][1])
+    } else {
+      merged.push(previous);
+      previous = intervals[i];
+
+    }
+  }
+//return the merged array
+merged.push(previous);
+return merged;
+
+}
+
+// [[1,3],[2,6],[8,10],[15,18]]
+console.log(merge([[8, 10], [15, 18], [1, 3], [2, 6]]))
 module.exports = {mergeRanges};
