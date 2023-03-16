@@ -15,14 +15,10 @@ Given an array of nullean booleans and string conjuction, return a
 [true, null] "OR" -> true
 */
 
-
-
 const validData = (array, condition) => {
     //check if the initial condition "AND"
-  
     if (condition === "AND"){
-        //create a nullflag initalized to false;
-        let andFlag = false; 
+        //create a nullflag initalized to false
         //iterate over the array
         for (let el of array){
             //check if any of the value are false -> return false
@@ -30,9 +26,7 @@ const validData = (array, condition) => {
             //check if any of the values are null -> change boolean to null
             if (el === null) return null;
         }
-        //outside of loop check if boolean flag is true, 
-        return true; 
-            //if true, return null otherwise return true
+        return true;    
     }
     //check if the initial value is "OR"
     if (condition === "OR"){
@@ -46,14 +40,23 @@ const validData = (array, condition) => {
             if (el === null) orFlag = true;
         }
         //outside the loop check if the flag is true
-        if (orFlag){
-            return null;
-        } else {
-            return false; 
-        }
+        return orFlag ? null : false
             //if true, return null, otherwise return false
     }
 }
+
+console.log(validData([true, true], "AND"))
+console.log(validData([false, false], "AND"))
+console.log(validData([true, false], "AND"))
+console.log(validData([true, null], "AND"))
+console.log(validData([false, null], "AND"))
+
+
+// console.log(validData([null, false], "OR"))
+// console.log(validData([false, false], "OR"))
+// console.log(validData([null, false], "OR"))
+// console.log(validData([null, true], "OR"))
+
 
 /*[true, true] "AND" -> true
 [false, false] "AND" -> false
@@ -66,13 +69,4 @@ const validData = (array, condition) => {
 [false, null] "OR" -> null
 [true, null] "OR" -> true
 */
-// console.log(validData([null, false], "OR"))
-// console.log(validData([false, false], "OR"))
-// console.log(validData([null, false], "OR"))
-// console.log(validData([null, true], "OR"))
 
-// console.log(validData([true, true], "AND"))
-// console.log(validData([false, false], "AND"))
-// console.log(validData([true, false], "AND"))
-// console.log(validData([true, null], "AND"))
-// console.log(validData([false, null], "AND"))
