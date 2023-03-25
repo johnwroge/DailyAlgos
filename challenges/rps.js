@@ -39,6 +39,27 @@ return results;
   
 };
 
+function minimize(point, k) {
+  let operations = [];
+  
+  const dfs = (n, str = '') => {
+      
+      if (str.length === n){
+          operations.push(str)
+          return;
+      }
+      dfs (n, str + '+')
+      dfs (n, str + '-')
+  }
+  
+  dfs(point.length)
+
+for (let i = )
+
+    
+}
+
+console.log(minimize([2,3,4,5],2))
 
 //console.log(rps(3))
 /*
