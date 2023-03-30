@@ -48,6 +48,6 @@ function solve(m, s) {
 
 }
 
-function main() {
+
 
 console.log(minimize([2,3,4,1], 2))
