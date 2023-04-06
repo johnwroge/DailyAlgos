@@ -42,6 +42,7 @@ the divide and conquer approach, which is more subtle.
 
 //input: an array
 //output: largest sum of a contiguous sub array
+//kadans algorithm
 
 var maxSubArray = function(nums) {
     
