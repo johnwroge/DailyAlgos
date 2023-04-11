@@ -41,3 +41,17 @@ var Height = function(root) {
     // Otherwise, return the height of this subtree as max(leftHeight, rightHight) + 1...
 	return Math.max(leftHeight, rightHight) + 1;
 };
+
+//easier optimized solution 
+
+var isBalanced = (root) => {
+let res = true; 
+const maxDepth = (node) => {
+    if (!node) return 0;
+    let l = maxDepth(node.left), r = maxDepth(node.right);
+    if (Math.abs(l - r) > 1) res = false;
+    return 1 + Math.max(l, r)
+}
+maxDepth(root);
+return res; 
+}
