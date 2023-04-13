@@ -116,7 +116,13 @@ Output: []
   return result;
 };
 
+var zigZagBST = function(root){
 
+
+
+
+  
+}
 
 
 

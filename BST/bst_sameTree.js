@@ -32,6 +32,16 @@ Output: false
  * @param {TreeNode} q
  * @return {boolean}
  */
+
+var symmetricalTree = (root) => {
+
+    
+}
+
+
+
+
+
 var isSameTree = function(p, q) {
     
     //base case: if both not p and not q
