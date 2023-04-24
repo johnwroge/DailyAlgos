@@ -20,33 +20,78 @@ If this is impossible, return -1.
  * @param {number[][]} grid
  * @return {number}
  */
- var orangesRotting = function(grid) {
-    if (!grid) return 0; 
-    let count = 0; 
-    let col = grid[0].length;
-    let row = grid.length; 
-    let cache = grid.map(col => col.map(row => false))
-   
-    for (let i = 0; i < col; i++){
-        for (let j = 0; j < row.length; j++){
-            if (dfs(grid, i, j)){
-                count++ 
-            }
 
+/*
+
+1. understand the problem
+    given a
+
+
+
+2. algorithm design
+
+3. implementation
+
+
+*/
+
+
+
+var orangesRotting = function(grid) {
+    //create a bag class to store items from the grid; 
+    const queue = [];
+    //create a count variable
+    let count = 0; 
+    for (let i = 0; i < grid.length; i++){
+        for (let j = 0; j < grid[0].length; j++){
+            //if current value is 2 (rotten) push into queue
+            if (grid[i][j] === 2){
+                queue.push([i,j,0]);
+                //these are rotten at time = 0
+            } else if (grid[i][j] === 1){
+                count += 1;
+            }
+            //if current value is 1, increment count and reassign to 2
         }
     }
-
-    dfs(grid, col, row);
-    return count; 
-};
-
-const dfs = (graph, x, y) => {
-    if (!graph) return;
-    if (x < 0 || y < 0 || x >= col.length || y >= row.length) return; 
-    else if (cache[x][y]){
-      cache[x][y] = true;
+    //while the bag is not empty, process all the neighbors
+    let max = 0;
+    
+    while (queue.length){
+        let current = queue.shift();
+        let x = current[0];
+        let y = current[1];
+        let time = current[2];
+        max = Math.max(max, time)
+        
+        if (x < grid.length - 1 && grid[x + 1][y] === 1){
+             queue.push([x + 1, y, time + 1]);
+             grid[x + 1][y] = 2;
+             --count; 
+        }
+        if (x > 0 && grid[x - 1][y] === 1){
+            queue.push([x - 1, y, time + 1])
+            grid[x - 1][y] = 2;
+             --count; 
+        }
+        if (grid[x][y + 1] === 1){
+            queue.push([x, y + 1, time + 1])
+            grid[x][y + 1] = 2;
+             --count; 
+        }
+        if (grid[x][y - 1] === 1) {
+            queue.push([x, y - 1, time + 1])
+            grid[x][y - 1] = 2;
+             --count; 
+        }
 
     }
-}
+ //check whether we reached all the fresh oranges (if count === 0)
+ if (count === 0){
+     return max
+ } else {
+     return -1
+ }
 
-orangesRotting([[2,1,1],[1,1,0],[0,1,1]])
+}
+// orangesRotting([[2,1,1],[1,1,0],[0,1,1]])
