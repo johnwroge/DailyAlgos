@@ -60,3 +60,23 @@ var splitTree = function(P, M, pix, ileft, iright) {
         root.right = splitTree(P, M, pix+imid-ileft+1, imid+1, iright)
     return root
 }
+
+
+var buildTree = function(preorder, inorder) {
+	//create dfs helper function that takes a start, end and index parameter
+		function dfs(start,end,index){
+            //base case: if start is greater than end and preorder length matches index -> return null
+			  if(start>end || preorder.length === index){
+				return null;
+			  }
+              //create a new treenode with the value at the key of index
+			  let tree = new TreeNode(preorder[index]);
+              //create a getindex variable and assign to the index 
+			  let getIndex = inorder.indexOf(preorder[index]);
+			  tree.left = getIndex!==-1?dfs(start,getIndex-1,index+1):null;
+			  tree.right = getIndex!==-1?dfs(getIndex+1,end,index+1):null;
+			  preorder.splice(index,1);
+			  return tree;
+		}    
+return dfs(0,preorder.length,0);
+}
