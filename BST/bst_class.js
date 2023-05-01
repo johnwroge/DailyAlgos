@@ -32,7 +32,7 @@ TreeNode.prototype.add = function(val){
 
 
 TreeNode.prototype.BFS =  function () {
-    // let queue = [this];
+    let queue = [this];
     const result = [];
     while (queue.length){
         let current = queue.shift();
@@ -44,10 +44,24 @@ TreeNode.prototype.BFS =  function () {
 return result; 
 }
 
+TreeNode.prototype.DFS = function () {
+    console.log(this)
+    let queue = [this];
+    const result = [];
+    while (queue.length){
+        let current = queue.pop();
+        console.log(current.val)
+        if (current.left) queue.push(current.left);
+        
+        if (current.right) queue.push(current.right);
+    }
+return result; 
+}
+
+
 function Stack(){
     this.storage = {};
     this.index = 0;
-
 }
 
 Stack.prototype.enqueue = function (value){
@@ -64,15 +78,6 @@ Stack.prototype.dequeue = function (){
     return temp
 }
 
-// let stack = new Stack();
-// stack.enqueue(2)
-// stack.enqueue(3)
-// stack.enqueue(4)
-// stack.enqueue(5)
-// // console.log(stack)
-// console.log(stack.dequeue())
-// console.log(stack.dequeue())
-// console.log(stack.dequeue())
 
 
 
@@ -89,3 +94,5 @@ bst.add(8)
 bst.add(7)
 bst.add(9)
 bst.add(10)
+
+console.log(bst.DFS())
