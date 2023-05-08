@@ -59,7 +59,6 @@ var canFinish = function(numCourses, prerequisites) {
           preMap[prerequisites[i][0]].push(prerequisites[i][1])
       }
   }
-  console.log(preMap)
   const dfs = (node) => {
       if(visited[node]){
           return false;
@@ -300,11 +299,38 @@ var checkNeighbors = (graph, indegree, queue, order) => {
 
 
 
+// Course Schedule II
 
 
 
-
-
+const findOrder = (numCourses, prerequisites) => {
+  const prereq = new Map();
+  for (let i = 0; i < numCourses; i++){
+      prereq.set(i, [])
+  }
+  for (let [crs, pre] of prerequisites){
+      prereq.get(crs).push(pre)
+  }
+  let output = [];
+  let cycle = new Set();
+  let visit = new Set();
+  function dfs(crs){
+      if (cycle.has(crs)) return false;
+      if (visit.has(crs)) return true; 
+      cycle.add(crs);
+      for (let pre of prereq.get(crs)){
+          if (!dfs(pre)) return false;
+      }
+      cycle.delete(crs)
+      visit.add(crs)
+      output.push(crs)
+      return true;
+  }
+  for (let i = 0; i < numCourses; i++){
+      if (!dfs(i)) return [];
+  }
+return output;
+}
 
 
 

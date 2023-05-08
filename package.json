@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "private": true,
   "description": "",
+  "type": "module",
   "scripts": {
     "test": "jest",
     "test-hh": "bash ./scripts/run-test.sh"
