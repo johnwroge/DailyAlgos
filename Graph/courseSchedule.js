@@ -42,9 +42,79 @@ All the pairs prerequisites[i] are unique.
  * @param {number[][]} prerequisites
  * @return {boolean}
  */
- var canFinish = function(numCourses, prerequisites) {
-    
-};
+
+//Charles Method: Kahn's Algorithm using Topological Sort
+var canFinish = function(numCourses, prerequisites) {
+
+  const adjList = {};
+  for (let i = 0; i < numCourses; i++){
+      adjList[i] = []
+  };
+
+  //create an array of length number of course initialized to 0 at each position
+      //everything that still has a zero, these don't have any prerequisites
+  const inboundCourse = new Array(numCourses).fill(0);
+
+  for (let i = 0; i < prerequisites.length; i++){
+      const [second, first] = prerequisites[i];
+      adjList[first].push(second)
+      //increment inboundCourse at Second by 1 (we found 1 more course we have to take in order to take second)
+      inboundCourse[second]++; 
+  }
+  const Queue = [];
+  let totalCoursesTaken = 0;
+  for (let i = 0; i < inboundCourse.length; i++){
+      if (inboundCourse[i] === 0){
+          totalCoursesTaken++;
+       Queue.push(i);
+      }
+  }
+//big idea: simulate taking the course only after taking the prerequisites of the course
+  //instead of blind fifo, only allowed to push neighbor into queue when it's number of inbound courses is 0
+  while (Queue.length){
+      let current = Queue.shift();
+      //post requisites of class (not prerequisites)
+      //iterate through each downstream class
+      for (let downstreamClass of adjList[current]){
+          //decrement the number of 
+          inboundCourse[downstreamClass] -= 1;
+          if (inboundCourse[downstreamClass] === 0){
+              //every time course goes into queue, the total courses taken gets incremneted by 1
+               totalCoursesTaken++;
+               Queue.push(downstreamClass); 
+          }
+      }
+  }
+  //at the end, keep a count of how many courses go into queue, if this number matches total number of courses
+      //return true, 
+      //otherwise return false; (the null behavior)
+  return totalCoursesTaken === numCourses; 
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 var canFinish = function(numCourses, prerequisites) {
     
