@@ -19,6 +19,18 @@ class MaxBinaryHeap {
         }
 
     }
+    // highest priority item is removed with this method (the root)
+    extractMax(){
+        [this.values[0], this.values[this.values.length - 1]] = [this.values[this.values.length - 1], this.values[0]]
+        let max = this.values.pop()
+        this.sinkDown()
+    }
+
+    sinkDown(){
+        let counter = 0; 
+        
+
+    }
 
 }
 

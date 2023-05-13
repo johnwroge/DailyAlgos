@@ -64,24 +64,30 @@ var findRedundantConnection = function(edges) {
         //for each edge destructure u and v as 0th and 1st index
        let [u, v] = edge;
         //check if evaluating find helper function with u is equal to evaluated result of v
+        //check if edges two vertices are already connected by finding their corresponding set using find helper function
        if (find(u) === find(v)){
-            //if true return edge
+        
+            //if they are already connected, return that edge
         return edge;
        } else {
-            //otherwise invoke union helper function with u and v
+            //otherwise connect the two vertices by merging their sets -> invoke union helper function with u and v
         union(u,v)
        }      
     } 
     
     //create union helper function that takes two values a,b
+        //union function merges two sets by setting the value of the 
+        //find result for one set to the find result of the other set.
     function union(a, b){ 
         //create a key in object of evaluated result of invoking find with a and assign it to the value of the value at the key of 
         //invoking find function with b ... ?
         uf[find(a)] = uf[find(b)] 
     }
-    //create find helper function that takes a point x
+    //The find function recursively searches for the representative element (also called the root) of the set 
+    //containing a given element and performs path compression to optimize future searches.
     function find(x){
         //check if there is not a key of x in object, if true create a key of the x and a value of x
+        console.log(uf)
         if (!uf[x]) uf[x] = x;
         //check if the key of x in the object is equal to x, return x
         if (uf[x] === x) return x; 
