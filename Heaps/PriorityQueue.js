@@ -1,12 +1,30 @@
+/*
+A data structure where each element has a priority. Elements with higher priorities are served before
+elements with lower priorities; can be implemented with an array or list, however it's slower 
+    [p: 3, p: 1, p: 2, p: 5, p: 4];
+
+so we are using a heap instead; 
+works faster because retrieval is log(n);
+we will be using a min binary heap because some systems treat lower numbers as higher priority than higher numbers
+
+*/
+class Node {
+    constructor(val, priority){
+        this.val = val;
+        this.priority = priority; 
+    }
+}
 
 
-class MaxBinaryHeap {
+class PriorityQueue{
     constructor (){
         this.values = []; 
+        
     };
 
-    insert (element){
-        this.values.push(element);
+    enqueue (val, priority){
+        let newNode = new Node(val, priority);
+        this.values.push(newNode);
         this.bubbleUp(); 
     }
 
@@ -16,7 +34,8 @@ class MaxBinaryHeap {
         while (index > 0){
             let parentIndex = Math.floor((index - 1)/2);
             let parent = this.values[parentIndex];
-            if (element <= parent) break;
+            //this line changes because we need to compare priority
+            if (element.priority >= parent.priority) break;
             this.values[parentIndex] = element;
             this.values[index] = parent; 
             index = parentIndex;
@@ -43,7 +62,7 @@ class MaxBinaryHeap {
                 //assign left child to be the value at the left index in this.values
                 leftChild = this.values[left];
                 //if leftchild is greater than element
-                if (leftChild > element){
+                if (leftChild.priority < element.priority){
                     //reassign swap to be left
                     swap = left;
                 }
@@ -55,8 +74,8 @@ class MaxBinaryHeap {
                 //check if swap is null and right child is greater than element 
                 //or if swap is not null and right child is greater than left child
                 if (
-                    (swap === null && rightChild > element) ||
-                    (swap !== null && rightChild > leftChild)
+                    (swap === null && rightChild.priority < element.priority) ||
+                    (swap !== null && rightChild.priority < leftChild.priority)
                     )
                 {//if true reassign swap to be right
                     swap = right;
@@ -75,9 +94,9 @@ class MaxBinaryHeap {
         
         
     }
-    extractMax (){
+    dequeue (){
         //store value of max = to first value
-        const max = this.values[0];
+        const min = this.values[0];
         //store the last value as end, and remove it
         const end = this.values.pop();
         
@@ -85,18 +104,20 @@ class MaxBinaryHeap {
             this.values[0] = end; 
             this.sinkDown(); 
         }
-        return max;
-    
+        return min;
     }
-    } 
+}
 
-let heap = new MaxBinaryHeap();
-heap.insert(41);
-heap.insert(39)
-heap.insert(33);
-heap.insert(18);
-heap.insert(27);
-heap.insert(12);
-heap.insert(55);
-console.log(heap)
-console.log(heap.extractMax())
+let er = new PriorityQueue();
+er.enqueue('common cold', 5)
+er.enqueue('gunshot', 1)
+er.enqueue('fever', 4)
+er.enqueue('arm broke', 2)
+er.enqueue('foot glass', 3)
+console.log(er.dequeue())
+console.log(er.dequeue())
+console.log(er.dequeue())
+console.log(er.dequeue())
+console.log(er.dequeue())
+console.log(er.dequeue())
+
