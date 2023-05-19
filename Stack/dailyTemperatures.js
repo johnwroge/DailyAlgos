@@ -4,7 +4,9 @@ Medium
 10.6K
 237
 Companies
-Given an array of integers temperatures represents the daily temperatures, return an array answer such that answer[i] is the number of days you have to wait after the ith day to get a warmer temperature. If there is no future day for which this is possible, keep answer[i] == 0 instead.
+Given an array of integers temperatures represents the daily temperatures, return an array 
+answer such that answer[i] is the number of days you have to wait after the ith day to get 
+a warmer temperature. If there is no future day for which this is possible, keep answer[i] == 0 instead.
 
 
 Example 1:
@@ -68,7 +70,8 @@ var dailyTemperatures = function(T) {
             //reassing the element at current index in result array to be the 
             //last elemenent in the stack minus the current index
         if(stack.length){
-            result[i] = stack[stack.length-1] - i;   
+            let temp = stack[stack.length - 1];
+            result[i] = temp - i;   
         }
         //push the element in the stack
         stack.push(i)
