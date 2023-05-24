@@ -1,3 +1,36 @@
+
+// function buckets (arr){
+
+//     let current = new Set();
+//     let max = 0; 
+//     for (let i = 0; i < arr.length; i++){
+//         const [first, second] = arr[i].split(' ');
+//         console.log(first, second)
+//         if (first === "goto"){
+//             max = Math.max(current.size, max)
+//             current = new Set();
+//         }
+
+//         if (first === "create"){
+//             current.add(second)
+//             max = current.size
+//         }
+//     }
+// return max; 
+
+// }
+
+
+
+// let input1 = ["goto bucketA", "create bbb", "create aaa", "goto bucketB", "create ccc", "goto bucketC",  "create aaa", "create bbb", "create ccc”"
+// ]
+
+// console.log(buckets(input1))
+
+
+
+
+
 /* 
 You are given an array of strigns paths containing parths to some files or directories. All file paths
 start with "/". 
@@ -68,8 +101,9 @@ function solution(pattern, source) {
 /* Bus Schedule*/
 
 function busSchedule (arr, timeGiven){
+
     let timeNow = parseInt(timeGiven.substring(0,2)) * 60 + parseInt(timeGiven.substring(3))
-    
+    console.log(timeGiven.substring(0,2) * 60)
     let res = 0; 
 
     arr.sort((a,b) => a - b)
@@ -85,13 +119,11 @@ function busSchedule (arr, timeGiven){
             return timeNow - time[i]
         }
     }
-
-
 }
 
-// let schedule = [`05:00`, `07:30`, `10:30`]
-// let giventime = '08:00'
-// console.log(busSchedule(schedule,giventime))
+let schedule = [`05:00`, `07:30`, `10:30`]
+let giventime = '08:00'
+//console.log(busSchedule(schedule,giventime))
 
 
 /*
@@ -144,5 +176,143 @@ function testing (arr) {
     return str; 
 }
 
-let test = [[1, 5], [2, 1, 2], [2, 4, 3]]
-console.log(testing(test))
+
+/*
+You are given an array of non-negative integers numbers. You are allowed to choose any number from this array and swap any two digits in it. If after the swap operation the number contains leading zeros, they can be omitted and not considered (eg: 010 will be considered just 10).
+
+Your task is to check whether it is possible to apply the swap operation at most once, so that the elements of the resulting array are strictly increasing.
+
+Example
+
+For numbers = [1, 5, 10, 20], the output should be solution(numbers) = true.
+
+The initial array is already strictly increasing, so no actions are required.
+
+For numbers = [1, 3, 900, 10], the output should be solution(numbers) = true.
+
+By choosing numbers[2] = 900 and swapping its first and third digits, the resulting number 009 is considered to be just 9. So the updated array will look like [1, 3, 9, 10], which is strictly increasing.
+
+For numbers = [13, 31, 30], the output should be solution(numbers) = false.
+
+The initial array elements are not increasing.
+By swapping the digits of numbers[0] = 13, the array becomes [31, 31, 30] which is not strictly increasing;
+By swapping the digits of numbers[1] = 31, the array becomes [13, 13, 30] which is not strictly increasing;
+By swapping the digits of numbers[2] = 30, the array becomes [13, 31, 3] which is not strictly increasing;
+So, it's not possible to obtain a strictly increasing array, and the answer is false.
+*/
+
+
+function solution2(numbers) {
+
+    let result = isIncreasing(numbers)
+    if (result === true) return true; 
+    else {
+        const [middle, i] = result; 
+       
+        let candidates = swapAndOmit(middle);
+        if (!candidates) return false; 
+       
+        for (let str of candidates){
+            const number = Number(str);
+            const copy = numbers; 
+            copy[i] = number;
+            let value = isIncreasing(copy)
+    
+            if (value === true){
+                console.log()
+                return true; 
+            }
+        }       
+    }
+return false; 
+}
+
+function isIncreasing(array){
+    for (let i = 0; i < array.length - 1; i++){
+        console.log(array[i + 1], array[i])
+        if (array[i + 1] <= array[i]) return [array[i], i]
+    }
+    return true; 
+}
+
+function swapAndOmit(inputNumber) {
+    const inputStr = String(inputNumber);
+    const result = [];
+    //iterate over input str
+    for (let i = 0; i < inputStr.length; i++){
+    //store the first character in a variable
+        let first = inputStr[i];
+    //make a copy of the number without the first digit
+        let copy = inputStr.slice(1)
+    //append the digit to the end and join and push this into candidates
+        let candidate = copy.concat(first)
+        result.push(candidate)
+    }
+    return result;
+  }
+
+
+
+  function arrTarget (target){
+    const result = [];
+    for (let i = 0; i < target.length; i++){
+        if (i === 0 || i === target.length - 1){
+            result.push(target[i])
+        }
+        let bigger = Math.max(target[i - 1], target[i + 1])
+        if (target[i] > bigger){
+            result.push(target[i])
+        } 
+    }
+    return result
+  }
+
+
+
+//   console.log(arrTarget([1, 2, 1]));
+
+/*return 1st team and 2nd team in array [1st, 2nd], index corresponds to team
+  index 0,1,2 = team 0, team 1, team 2
+  each win = 3 points
+  each draw = 1 point
+  each loss = 0 points
+*/
+
+function team (wins, draws, scored, conceded) {
+
+    const result = [];
+    const result2 = {};
+    const differences = [];
+    const differences2 = {};
+
+    for (let i = 0; i < wins.length; i++){
+        let scores = wins[i] * 3
+        scores += draws[i] * 1;
+        result[i] = scores;
+        result2[result[i]] = i; 
+        let diff = scored[i] - conceded[i];
+        differences[i] = diff;
+        differences2[differences[i]] = i; 
+    }
+   
+    result.sort((a,b) => b-a);
+    if (result[0] !== result[1]) return [result2[result[0]], result2[result[1]]]
+    else {
+        differences.sort((a,b) => b - a);
+        return [differences2[differences[0]], differences[1]]
+    }
+
+}
+
+// let wins = [2, 1, 0];
+// let draws = [1, 5, 6];
+// let scored = [20, 15, 10];
+// let conceded = [20, 10, 15];
+
+let wins = [3, 1, 2, 2]; 
+let draws = [1, 5, 4, 4];
+let scored = [30, 10, 20, 40];
+let conceded = [32, 13, 18, 37];
+
+console.log(team(wins, draws, scored, conceded))
+
