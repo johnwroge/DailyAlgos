@@ -43,11 +43,72 @@ there isn't any common suffix path return an empty string as ""
 */
 
 
+function filePath(paths){
+    let longest = ""
+    for (let i = 0; i < paths.length; i++){
+        let first = paths[i].split('/').pop()
+        
+        let difference = false; 
+        for(let j = 1; j < paths.length; j++){   
+        }
+        if (difference) break;
+    }
+}
+
+
+let paths1 = [
+    "/a/folder1/../folder1/a/leaf.txt", 
+    "/b/folder2/../folder1/a/leaf.txt", 
+    "/a/folder3/folder1/folder1/../a/leaf.txt"]
+
+console.log(filePath(paths1))
+
+
 /*
  Given a 2d matrix and a rhombus radius, find the maxSum of a rhombus's frame
 */
 
+function maxSumRhombus(grid, radius){
 
+    let maxSum = 0; 
+    for (let row = 0; row < grid.length; row++){
+        for (let col = 0; col < grid[0].length; col++){
+            if (isValidRhomubs(grid,radius, row, col)){
+                let result = sumRhombusFrame(grid,radius, row, col)
+                maxSum = Math.max(result, maxSum)
+            }
+        }
+    }
+return maxSum; 
+
+}
+//need to check up right, down right, 
+function isValidRhomubs(matrix, radius, i, j){
+    let down = i + radius; 
+    let up = i - radius
+    let left = j - radius;
+    let right = j + radius; 
+
+    if (up < 0 || down < 0 || up >= matrix.length || down >= matrix.length) return false;
+    if (left < 0 || right < 0 || left >= matrix[0].length || right >= matrix[0].length) return false;
+
+return true; 
+
+}
+function sumRhombusFrame(matrix, radius, i, j){
+    let sum = 0; 
+    let down = i + radius; 
+    let up = i - radius
+    let left = j - radius;
+    let right = j + radius; 
+    sum += matrix[down][left]
+    sum += matrix[up][left]
+    sum += matrix[down][right]
+    sum += matrix[up][right]
+return sum; 
+}
+
+//console.log(maxSumRhombus([[3,4,5,1,3],[3,3,4,2,3],[20,30,200,40,10],[1,5,5,4,1],[4,3,2,2,5]], 1))
 
 /*
  Given an array of commands, return an array of the frequency each command occurred
@@ -58,7 +119,32 @@ E.g.
 !1 => ls
 !3 => cp
 !6 => !1 => ls
+
+Return result in specific order given like [ n of ls, n of cp, n of mv]
+Result = [2, 4, 1] in this case
 */
+
+function countStuff (commands){
+
+    let numLS = 0;
+    let numCP = 0;
+    let numMV = 0;
+    const result = [];
+
+    for (let i = 0; i < commands.length; i++){
+        if (commands[i] === "!1" || commands[i] === "ls" || commands[i] === "!6") numLS++
+        if (commands[i] === "!3" || commands[i] === "cp") numCP++
+        if (commands[i] === "mv") numMV++
+    }
+result.push(numLS)
+result.push(numCP)
+result.push(numMV)
+return result;
+}
+
+// console.log(countStuff(['ls', 'mv', 'cp', 'cp', 'cp', '!1', '!3', '!6 ']))
+
+
 
 
 
@@ -314,5 +400,5 @@ let draws = [1, 5, 4, 4];
 let scored = [30, 10, 20, 40];
 let conceded = [32, 13, 18, 37];
 
-console.log(team(wins, draws, scored, conceded))
+// console.log(team(wins, draws, scored, conceded))
 
