@@ -56,6 +56,8 @@ function filePath(paths){
 }
 
 
+
+
 let paths1 = [
     "/a/folder1/../folder1/a/leaf.txt", 
     "/b/folder2/../folder1/a/leaf.txt", 
@@ -402,3 +404,211 @@ let conceded = [32, 13, 18, 37];
 
 // console.log(team(wins, draws, scored, conceded))
 
+
+
+/** 
+Domain name forwarding lets GoDaddy domain owners automatically redirect their site visitors to a different site URL. Sometimes the visitors have to go through multiple redirects before ending up on the correct site.
+
+Using the DNS Manager, GoDaddy customers can view redirects in a simple visual format. One handy feature is the ability to group the domains by the final website they redirect to. Your task is to implement this feature.
+
+For the given redirects list, organize its domains into groups where for a specific group each domain eventually redirects visitors to the same website.
+
+Example
+
+For
+
+redirects = [["godaddy.net", "godaddy.com"], 
+             ["godaddy.org", "godaddycares.com"], 
+             ["godady.com", "godaddy.com"],
+             ["godaddy.ne", "godaddy.net"]]
+the output should be
+solution(redirects) = [["godaddy.com", "godaddy.ne", "godaddy.net", "godady.com"], ["godaddy.org", "godaddycares.com"]]
+
+In the first group, "godaddy.ne" redirects to "godaddy.net", which in turn redirects to "godaddy.com". "godady.com" redirects visitors to "godaddy.com" as well.
+In the second group, "godaddy.org" redirects visitors to "godaddycares.com".
+Note, that domains in each group are sorted lexicographically and groups themselves are sorted lexicographically by the domain they redirect to. So in the example, the first group goes before the second because "godaddy.com" is lexicographically smaller than "godaddycares.com".
+*/
+
+/*
+  godaddy.com: [godaddy.net, godady.com]
+  godaddycares.com: [godaddy.org]
+  godaddy.net: [godaddy.net] 
+
+use dfs recursive function along with an adjacency list. 
+
+purpose of kahns algo is to sort some kind of list based on a dependency. can be used to tell if they are in the right order. 
+
+we need to get them into certain groups 
+
+  godaddy.net: [godaddy.com]
+  godaddy.org: [godaddycares.com]
+  godady.com: [godaddy.com]
+  godaddy.ne: [godaddy.net]
+
+
+*/
+
+function solution (domains) {
+    //start with an array
+    const results = [];
+    /*keys are each individual site, the values of the redirects*/
+    let adjList = listToAdjList(domains); 
+    console.log(adjList)
+    //may need to keep track of sites when performing dfs
+    let visited = new Set();
+    const dfs = (dep, arr) => {
+      if (!dep || visited.has(dep)){
+        return; 
+      }
+      arr.push(dep)
+      visited.add(dep)
+      dfs(adjList[dep], arr)
+    }
+    //iterate over each key of the adjlist  
+    for (let key of Object.keys(adjList)){
+        //place all it's dependencies in an array along with
+        //the key into the array with df
+      //this gets populated in dfs
+       const arr = []
+       dfs(key, arr);
+      if (arr.length){
+       results.push(arr)
+      }
+      //then move onto next key with new array
+    }
+    
+    //iterate over results 
+  return results; 
+  }
+  
+     function listToAdjList(list){
+      const adjList = {};
+      for (let [first, second] of list){
+        //add each one as a key and the secnd
+        adjList[first] = second
+        if (!(second in adjList)) {
+          adjList[second] = ""
+        }
+      }
+      return adjList; 
+    }
+  
+  
+  console.log(solution([["godaddy.net", "godaddy.com"], 
+               ["godaddy.org", "godaddycares.com"], 
+               ["godady.com", "godaddy.com"],
+               ["godaddy.ne", "godaddy.net"]]))
+
+               const { access } = require("fs");
+const { mapValues } = require("lodash");
+
+function solution(queryType, query) {
+  let hashmap = {};
+  let keyOffset = 0;
+  let valueOffset = 0;
+  let sum = 0;
+
+  function insert(x, y) {
+    hashmap[x - keyOffset] = y - valueOffset;
+  }
+
+  function get(x) {
+    let adjustedKey = x - keyOffset;
+    if (adjustedKey in hashmap) {
+      let adjustedValue = hashmap[adjustedKey] + valueOffset;
+      sum += adjustedValue;
+      return adjustedValue;
+    }
+    return null;
+  }
+
+  function addToKey(x) {
+    keyOffset += x;
+  }
+
+  function addToValue(y) {
+    valueOffset += y;
+  }
+
+  for (let i = 0; i < queryType.length; i++) {
+    let operation = queryType[i];
+    let values = query[i];
+    const [x, y] = values;
+
+    switch (operation) {
+      case "insert":
+        insert(x, y);
+        break;
+      case "addToValue":
+        addToValue(x);
+        break;
+      case "addToKey":
+        addToKey(x);
+        break;
+      case "get":
+        get(x);
+        break;
+    }
+  }
+
+  return sum;
+}
+
+function concatenationsSum2(a) {
+    var lowSum = 0;
+    for (var i = 0; i < a.length; i++)
+        lowSum += a[i];
+
+    var sum = lowSum * a.length;
+
+    for (var i = 0; i < a.length; i++) {
+        var size = a[i].toString().length;
+        var offset = iPower(10, size);
+        sum = sum + lowSum * offset;
+    }
+
+    return sum;
+}
+
+function iPower(base, power) {
+    var result = 1;
+    for (var i = 1; i <= power; i++)
+        result *= base;
+
+    return result;
+}
+
+function solution(s) {
+    if (!s) return '';
+    const sLen = s.length;
+    let finalRes = '';
+  
+    let targetStr = s;
+    for (i = 0; i < sLen; i++) {
+      let maxPrefixLen = 0;
+  
+      for (let j = 1; j <= targetStr.length; j++) {
+        let str = targetStr.substring(0, j);
+        let strR = [...str].reverse().join('');
+  
+        if (str == strR) {
+          maxPrefixLen = j;
+        }
+      }
+      const prefix = targetStr.substring(0, maxPrefixLen);
+      const prefixLen = prefix.length;
+  
+      if (prefixLen === 1) {
+        finalRes = targetStr;
+        break;
+      }
+  
+      if (prefixLen === 0) {
+        finalRes = '';
+        break;
+      }
+      targetStr = targetStr.replace(prefix, '');
+    }
+  
+    return finalRes;
+  }
