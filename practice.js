@@ -45,14 +45,11 @@ there isn't any common suffix path return an empty string as ""
 
 function filePath(paths){
     let longest = ""
+
     for (let i = 0; i < paths.length; i++){
-        let first = paths[i].split('/').pop()
-        
-        let difference = false; 
-        for(let j = 1; j < paths.length; j++){   
-        }
-        if (difference) break;
+        paths[i] = paths[i].split('/').reverse()
     }
+    console.log(paths)
 }
 
 
@@ -266,9 +263,12 @@ function testing (arr) {
 
 
 /*
-You are given an array of non-negative integers numbers. You are allowed to choose any number from this array and swap any two digits in it. If after the swap operation the number contains leading zeros, they can be omitted and not considered (eg: 010 will be considered just 10).
+You are given an array of non-negative integers numbers. You are allowed to choose any number 
+from this array and swap any two digits in it. If after the swap operation the number contains l
+eading zeros, they can be omitted and not considered (eg: 010 will be considered just 10).
 
-Your task is to check whether it is possible to apply the swap operation at most once, so that the elements of the resulting array are strictly increasing.
+Your task is to check whether it is possible to apply the swap operation at most once, so that
+ the elements of the resulting array are strictly increasing.
 
 Example
 
@@ -278,7 +278,8 @@ The initial array is already strictly increasing, so no actions are required.
 
 For numbers = [1, 3, 900, 10], the output should be solution(numbers) = true.
 
-By choosing numbers[2] = 900 and swapping its first and third digits, the resulting number 009 is considered to be just 9. So the updated array will look like [1, 3, 9, 10], which is strictly increasing.
+By choosing numbers[2] = 900 and swapping its first and third digits, the resulting number 009 
+is considered to be just 9. So the updated array will look like [1, 3, 9, 10], which is strictly increasing.
 
 For numbers = [13, 31, 30], the output should be solution(numbers) = false.
 
@@ -290,38 +291,38 @@ So, it's not possible to obtain a strictly increasing array, and the answer is f
 */
 
 
-function solution2(numbers) {
+// function solution2(numbers) {
 
-    let result = isIncreasing(numbers)
-    if (result === true) return true; 
-    else {
-        const [middle, i] = result; 
+//     let result = isIncreasing(numbers)
+//     if (result === true) return true; 
+//     else {
+//         const [middle, i] = result; 
        
-        let candidates = swapAndOmit(middle);
-        if (!candidates) return false; 
+//         let candidates = swapAndOmit(middle);
+//         if (!candidates) return false; 
        
-        for (let str of candidates){
-            const number = Number(str);
-            const copy = numbers; 
-            copy[i] = number;
-            let value = isIncreasing(copy)
+//         for (let str of candidates){
+//             const number = Number(str);
+//             const copy = numbers; 
+//             copy[i] = number;
+//             let value = isIncreasing(copy)
     
-            if (value === true){
-                console.log()
-                return true; 
-            }
-        }       
-    }
-return false; 
-}
+//             if (value === true){
+//                 console.log()
+//                 return true; 
+//             }
+//         }       
+//     }
+// return false; 
+// }
 
-function isIncreasing(array){
-    for (let i = 0; i < array.length - 1; i++){
-        console.log(array[i + 1], array[i])
-        if (array[i + 1] <= array[i]) return [array[i], i]
-    }
-    return true; 
-}
+// function isIncreasing(array){
+//     for (let i = 0; i < array.length - 1; i++){
+//         console.log(array[i + 1], array[i])
+//         if (array[i + 1] <= array[i]) return [array[i], i]
+//     }
+//     return true; 
+// }
 
 function swapAndOmit(inputNumber) {
     const inputStr = String(inputNumber);
@@ -367,12 +368,10 @@ function swapAndOmit(inputNumber) {
 */
 
 function team (wins, draws, scored, conceded) {
-
     const result = [];
     const result2 = {};
     const differences = [];
     const differences2 = {};
-
     for (let i = 0; i < wins.length; i++){
         let scores = wins[i] * 3
         scores += draws[i] * 1;
@@ -381,15 +380,13 @@ function team (wins, draws, scored, conceded) {
         let diff = scored[i] - conceded[i];
         differences[i] = diff;
         differences2[differences[i]] = i; 
-    }
-   
+    } 
     result.sort((a,b) => b-a);
     if (result[0] !== result[1]) return [result2[result[0]], result2[result[1]]]
     else {
         differences.sort((a,b) => b - a);
         return [differences2[differences[0]], differences[1]]
     }
-
 }
 
 // let wins = [2, 1, 0];
@@ -448,38 +445,38 @@ we need to get them into certain groups
 
 */
 
-function solution (domains) {
-    //start with an array
-    const results = [];
-    /*keys are each individual site, the values of the redirects*/
-    let adjList = listToAdjList(domains); 
-    console.log(adjList)
-    //may need to keep track of sites when performing dfs
-    let visited = new Set();
-    const dfs = (dep, arr) => {
-      if (!dep || visited.has(dep)){
-        return; 
-      }
-      arr.push(dep)
-      visited.add(dep)
-      dfs(adjList[dep], arr)
-    }
-    //iterate over each key of the adjlist  
-    for (let key of Object.keys(adjList)){
-        //place all it's dependencies in an array along with
-        //the key into the array with df
-      //this gets populated in dfs
-       const arr = []
-       dfs(key, arr);
-      if (arr.length){
-       results.push(arr)
-      }
-      //then move onto next key with new array
-    }
+// function solution (domains) {
+//     //start with an array
+//     const results = [];
+//     /*keys are each individual site, the values of the redirects*/
+//     let adjList = listToAdjList(domains); 
+//     console.log(adjList)
+//     //may need to keep track of sites when performing dfs
+//     let visited = new Set();
+//     const dfs = (dep, arr) => {
+//       if (!dep || visited.has(dep)){
+//         return; 
+//       }
+//       arr.push(dep)
+//       visited.add(dep)
+//       dfs(adjList[dep], arr)
+//     }
+//     //iterate over each key of the adjlist  
+//     for (let key of Object.keys(adjList)){
+//         //place all it's dependencies in an array along with
+//         //the key into the array with df
+//       //this gets populated in dfs
+//        const arr = []
+//        dfs(key, arr);
+//       if (arr.length){
+//        results.push(arr)
+//       }
+//       //then move onto next key with new array
+//     }
     
-    //iterate over results 
-  return results; 
-  }
+//     //iterate over results 
+//   return results; 
+//   }
   
      function listToAdjList(list){
       const adjList = {};
@@ -494,121 +491,121 @@ function solution (domains) {
     }
   
   
-  console.log(solution([["godaddy.net", "godaddy.com"], 
-               ["godaddy.org", "godaddycares.com"], 
-               ["godady.com", "godaddy.com"],
-               ["godaddy.ne", "godaddy.net"]]))
+//   console.log(solution([["godaddy.net", "godaddy.com"], 
+//                ["godaddy.org", "godaddycares.com"], 
+//                ["godady.com", "godaddy.com"],
+//                ["godaddy.ne", "godaddy.net"]]))
 
-               const { access } = require("fs");
-const { mapValues } = require("lodash");
+//                const { access } = require("fs");
+// const { mapValues } = require("lodash");
 
-function solution(queryType, query) {
-  let hashmap = {};
-  let keyOffset = 0;
-  let valueOffset = 0;
-  let sum = 0;
+// function solution(queryType, query) {
+//   let hashmap = {};
+//   let keyOffset = 0;
+//   let valueOffset = 0;
+//   let sum = 0;
 
-  function insert(x, y) {
-    hashmap[x - keyOffset] = y - valueOffset;
-  }
+//   function insert(x, y) {
+//     hashmap[x - keyOffset] = y - valueOffset;
+//   }
 
-  function get(x) {
-    let adjustedKey = x - keyOffset;
-    if (adjustedKey in hashmap) {
-      let adjustedValue = hashmap[adjustedKey] + valueOffset;
-      sum += adjustedValue;
-      return adjustedValue;
-    }
-    return null;
-  }
+//   function get(x) {
+//     let adjustedKey = x - keyOffset;
+//     if (adjustedKey in hashmap) {
+//       let adjustedValue = hashmap[adjustedKey] + valueOffset;
+//       sum += adjustedValue;
+//       return adjustedValue;
+//     }
+//     return null;
+//   }
 
-  function addToKey(x) {
-    keyOffset += x;
-  }
+//   function addToKey(x) {
+//     keyOffset += x;
+//   }
 
-  function addToValue(y) {
-    valueOffset += y;
-  }
+//   function addToValue(y) {
+//     valueOffset += y;
+//   }
 
-  for (let i = 0; i < queryType.length; i++) {
-    let operation = queryType[i];
-    let values = query[i];
-    const [x, y] = values;
+//   for (let i = 0; i < queryType.length; i++) {
+//     let operation = queryType[i];
+//     let values = query[i];
+//     const [x, y] = values;
 
-    switch (operation) {
-      case "insert":
-        insert(x, y);
-        break;
-      case "addToValue":
-        addToValue(x);
-        break;
-      case "addToKey":
-        addToKey(x);
-        break;
-      case "get":
-        get(x);
-        break;
-    }
-  }
+//     switch (operation) {
+//       case "insert":
+//         insert(x, y);
+//         break;
+//       case "addToValue":
+//         addToValue(x);
+//         break;
+//       case "addToKey":
+//         addToKey(x);
+//         break;
+//       case "get":
+//         get(x);
+//         break;
+//     }
+//   }
 
-  return sum;
-}
+//   return sum;
+// }
 
-function concatenationsSum2(a) {
-    var lowSum = 0;
-    for (var i = 0; i < a.length; i++)
-        lowSum += a[i];
+// function concatenationsSum2(a) {
+//     var lowSum = 0;
+//     for (var i = 0; i < a.length; i++)
+//         lowSum += a[i];
 
-    var sum = lowSum * a.length;
+//     var sum = lowSum * a.length;
 
-    for (var i = 0; i < a.length; i++) {
-        var size = a[i].toString().length;
-        var offset = iPower(10, size);
-        sum = sum + lowSum * offset;
-    }
+//     for (var i = 0; i < a.length; i++) {
+//         var size = a[i].toString().length;
+//         var offset = iPower(10, size);
+//         sum = sum + lowSum * offset;
+//     }
 
-    return sum;
-}
+//     return sum;
+// }
 
-function iPower(base, power) {
-    var result = 1;
-    for (var i = 1; i <= power; i++)
-        result *= base;
+// function iPower(base, power) {
+//     var result = 1;
+//     for (var i = 1; i <= power; i++)
+//         result *= base;
 
-    return result;
-}
+//     return result;
+// }
 
-function solution(s) {
-    if (!s) return '';
-    const sLen = s.length;
-    let finalRes = '';
+// function solution(s) {
+//     if (!s) return '';
+//     const sLen = s.length;
+//     let finalRes = '';
   
-    let targetStr = s;
-    for (i = 0; i < sLen; i++) {
-      let maxPrefixLen = 0;
+//     let targetStr = s;
+//     for (i = 0; i < sLen; i++) {
+//       let maxPrefixLen = 0;
   
-      for (let j = 1; j <= targetStr.length; j++) {
-        let str = targetStr.substring(0, j);
-        let strR = [...str].reverse().join('');
+//       for (let j = 1; j <= targetStr.length; j++) {
+//         let str = targetStr.substring(0, j);
+//         let strR = [...str].reverse().join('');
   
-        if (str == strR) {
-          maxPrefixLen = j;
-        }
-      }
-      const prefix = targetStr.substring(0, maxPrefixLen);
-      const prefixLen = prefix.length;
+//         if (str == strR) {
+//           maxPrefixLen = j;
+//         }
+//       }
+//       const prefix = targetStr.substring(0, maxPrefixLen);
+//       const prefixLen = prefix.length;
   
-      if (prefixLen === 1) {
-        finalRes = targetStr;
-        break;
-      }
+//       if (prefixLen === 1) {
+//         finalRes = targetStr;
+//         break;
+//       }
   
-      if (prefixLen === 0) {
-        finalRes = '';
-        break;
-      }
-      targetStr = targetStr.replace(prefix, '');
-    }
+//       if (prefixLen === 0) {
+//         finalRes = '';
+//         break;
+//       }
+//       targetStr = targetStr.replace(prefix, '');
+//     }
   
-    return finalRes;
-  }
+//     return finalRes;
+//   }
