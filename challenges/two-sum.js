@@ -85,7 +85,7 @@ The straightforward way to solve this problem would take O(n³) time. Is it poss
 //   return false; 
 // }
 
-//using three pointers
+//using three pointers, doesn't taken duplicates into consideration
 
 const threeSum = (arr, target) => { 
   const sorted = arr.sort((a,b) => a - b)
@@ -103,8 +103,39 @@ const threeSum = (arr, target) => {
 }
 return false; 
 }
-console.log(threeSum([ 2, 4, 2, 7, 6, 3, 1 ], 8))
+
+//takes duplicates and unique indices into consideration
+var threeSum2 = function(nums) {
+
+  const results = [];
+  nums.sort((a,b) => a - b);
+  let sum;
+  let j;
+  let k; 
+  for (let i = 0; i < nums.length; i++){
+      k = nums.length - 1; 
+      j = i + 1; 
+      while (j < k){
+          console.log(sum)
+          sum = nums[i] + nums[j] + nums[k];
+          if (sum > 0){
+              k--
+          }
+          else if (sum < 0){
+              j++
+          } else {
+              results.push([nums[i],nums[j],nums[k]]);
+              break; 
+          }
+      }
+     
+  }
+ return results;  
+};
+
+
+console.log(threeSum([-1,0,1,2,-1,-4]))
 
 
 
-module.exports = { twoSum, threeSum };
+//module.exports = { twoSum, threeSum };

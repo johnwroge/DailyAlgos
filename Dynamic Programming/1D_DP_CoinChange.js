@@ -55,3 +55,18 @@ var coinChange = function(coins, amount) {
         //if false, return the element at the table [length - 1]
     return table[table.length - 1] === Infinity ? -1 : table[table.length - 1];
 };
+
+//soln2
+
+const coinSum = (coins, amount) => {
+
+    const ways = new Array(amount + 1).fill(Infinity);
+    ways[0] = 0;
+
+    for (coin of coins){
+        for (let n = coin; n < ways.length; n++){
+            ways[n] = Math.min(ways[n], 1 + ways[n - coin]);
+        }
+    }
+return ways[n] === Infinity ? -1 : ways[amount];
+}
