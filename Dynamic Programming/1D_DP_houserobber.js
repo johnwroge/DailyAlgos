@@ -23,6 +23,24 @@ Total amount you can rob = 2 + 9 + 1 = 12.
 
 */
 
+function houseRobberRecursion(arr){
+    function stealFromhouse(index){
+        if (index >= arr.length) return 0;
+        console.log(arr[index])
+        return Math.max(arr[index] + stealFromhouse(index + 2), stealFromhouse(index + 1))
+    }
+return stealFromhouse(0);
+}
+
+
+console.log(houseRobberRecursion([2,1,1,2]))
+
+
+
+
+
+
+
 //approach dynamic programming
 
 const houseRobber = (nums) => {
@@ -42,7 +60,7 @@ const houseRobber = (nums) => {
 //return max 2
 return rob2; 
 }
-console.log(houseRobber([2,1,1,2]))
+// console.log(houseRobber([2,1,1,2]))
 /*
 current: 
 
