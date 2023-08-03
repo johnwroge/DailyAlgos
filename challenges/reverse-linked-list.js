@@ -23,6 +23,23 @@ function Node(value) {
  *
  */
 
+
+
+
+
+ let list = new Node(0)
+ list.next = new Node(1)
+ list.next.next = new Node(2)
+ list.next.next.next = new Node(3)
+
+ console.log(list)
+
+
+
+
+
+
+
 const reverseLinkedList = head => {
   //check if the head is a falsy value, return null
   if (!head) return null;

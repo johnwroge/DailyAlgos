@@ -236,3 +236,132 @@ function solution(a, k) {
     return binarySearch(1, maxRibbon);
 }
 
+/*
+You are given a string s. Your task is to count the number of ways of splitting s into three non-empty parts a, b and c (s = a + b + c) in such a way that a + b, b + c and c + a are all different strings.
+
+NOTE: + refers to string concatenation.
+
+Example
+
+For s = "xzxzx", the output should be solution(s) = 5.
+
+Consider all the ways to split s into three non-empty parts:
+
+If a = "x", b = "z" and c = "xzx", then all a + b = "xz", b + c = "zxzx" and c + a = xzxx are different.
+If a = "x", b = "zx" and c = "zx", then all a + b = "xzx", b + c = "zxzx" and c + a = zxx are different.
+If a = "x", b = "zxz" and c = "x", then all a + b = "xzxz", b + c = "zxzx" and c + a = xx are different.
+If a = "xz", b = "x" and c = "zx", then a + b = b + c = "xzx". Hence, this split is not counted.
+If a = "xz", b = "xz" and c = "x", then all a + b = "xzxz", b + c = "xzx" and c + a = xxz are different.
+If a = "xzx", b = "z" and c = "x", then all a + b = "xzxz", b + c = "zx" and c + a = xxzx are different.
+Since there are five valid ways to split s, the answer is 5.
+*/
+
+function solution(s) {
+  const n = s.length;
+  let count = 0;
+
+  for (let i = 1; i < n - 1; i++) {
+    for (let j = i + 1; j < n; j++) {
+      const a = s.substring(0, i);
+      const b = s.substring(i, j);
+      const c = s.substring(j);
+
+      if (a + b !== b + c && b + c !== c + a && c + a !== a + b) {
+        count++;
+      }
+    }
+  }
+
+  return count;
+}
+
+
+/*
+A sawtooth sequence is a sequence of numbers that alternate between increasing and decreasing. In other words, each element is either strictly greater than its neighbouring elements or strictly less than its neighbouring elements.
+
+examples
+
+Given an array of integers arr, your task is to count the number of contiguous subarrays that represent a sawtooth sequence of at least two elements.
+
+Example
+
+For arr = [9, 8, 7, 6, 5], the output should be solution(arr) = 4.
+
+Since all the elements are arranged in decreasing order, it won't be possible to form any sawtooth subarrays of length 3 or more. There are 4 possible subarrays containing two elements, so the answer is 4.
+
+For arr = [10, 10, 10], the output should be solution(arr) = 0.
+
+Since all of the elements are equal, none of subarrays can be sawtooth, so the answer is 0.
+
+For arr = [1, 2, 1, 2, 1], the output should be solution(arr) = 10.
+
+All contiguous subarrays containing at least two elements satisfy the condition of problem. There are 10 possible contiguous subarrays containing at least two elements, so the answer is 10.
+
+Input/Output
+
+[execution time limit] 4 seconds (js)
+
+[memory limit] 1 GB
+
+[input] array.integer arr
+
+An array of integers.
+
+Guaranteed constraints:
+2 ≤ arr.length ≤ 105,
+-109 ≤ arr[i] ≤ 109.
+
+[output] integer64
+
+Return the number of sawtooth subarrays.
+
+
+*/
+
+/*
+As we iterate, every time we flip between increasing and decreasing of subarray length 2,
+ the number of contiguous arrays goes up by the current streak of flips in a row. e.g. [1, 2, 1, 2, 1]
+ has 4 flips in a row so 1 + 2 + 3 + 4 = 10
+When we break out of a sawtooth streak, that is, when we increase twice in a row or decrease twice in a row, 
+the longest contiguous subarray now is just 2, so we reset the counter to 1 if the two values are not equal 
+(since that is a valid sawtooth) or 0 if the values are the same.
+Example with streaks and broken streaks: [1, 7, 3, 4, 5]. we maintain a streak of 3 as we iterate 
+([1, 7], [7, 3], [3, 4]), then [4, 5] breaks this streak since [3, 4] was also increasing, so we have the final count as (3 + 2 + 1) + 1 = 7 possible sawtooths.
+*/
+
+function solution(arr) {
+  if (arr.length < 2) {
+    return 0;
+  }
+
+  let count = 0;
+  let streak = 0;
+  let prevIncreasing = null;
+
+  for (let i = 1; i < arr.length; i++) {
+    if (arr[i] === arr[i - 1]) {
+      prevIncreasing = null;
+      streak = 0;
+    } else {
+      const currIncreasing = arr[i] > arr[i - 1];
+      if (currIncreasing !== prevIncreasing) {
+        // keep track of streak of flips between increasing and decreasing
+        streak++;
+        prevIncreasing = currIncreasing;
+      } else {
+        // when we break out of a streak, we reset the streak counter to 1
+        streak = 1;
+      }
+
+      // number of sawtooth contiguous subarrays goes up by the current streak
+      count += streak;
+    }
+  }
+
+  return count;
+}
+
+// Test cases
+console.log(solution([9, 8, 7, 6, 5])); // Output: 4
+console.log(solution([10, 10, 10])); // Output: 0
+console.log(solution([1, 2, 1, 2, 1])); // Output: 10
