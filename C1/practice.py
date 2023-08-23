@@ -18,3 +18,4 @@ k = 4
 
 result = max_profit(values, strategies, k)
 print(result)  # Output: 12 (maximum profit when buying at day 1 and selling at day 2)
+
