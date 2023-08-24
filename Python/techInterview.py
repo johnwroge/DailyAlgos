@@ -225,18 +225,18 @@ p =  "".join(random.sample(s,passlen ))
 
 #17 Wow, using beautiful soup to get h3 titles from web page
 
-import requests
-url = 'https://www.nytimes.com/'
-r = requests.get(url)
-r_html = r.text
+# import requests
+# url = 'https://www.nytimes.com/'
+# r = requests.get(url)
+# r_html = r.text
 
-# print(r_html)
-from bs4 import BeautifulSoup
+# # print(r_html)
+# from bs4 import BeautifulSoup
 
-soup = BeautifulSoup(r_html, features="html.parser")
+# soup = BeautifulSoup(r_html, features="html.parser")
 
-title = soup.find('span', 'articletitle')
-h3_elements = soup.find_all('h3')
+# title = soup.find('span', 'articletitle')
+# h3_elements = soup.find_all('h3')
 
 # Print the text content of each <h3> element
 # for h3 in h3_elements:
@@ -297,5 +297,89 @@ def binarySearch(nums, target):
 # print(binarySearch([1,3,5,7,8,9], 3))
 
 
-# 21
+# 21 write to text file
+'''
+Python makes it very easy to write to a file. Depending on what kind of 
+file you want to write to and what kind of data you are writing, your options are plenty. 
+I will show you the simplest form of writing to a file - writing 
+plain text to a plain old text file. In other words, writing a string to a .txt file.
 
+The code looks like this:
+
+  with open('file_to_save.txt', 'w') as open_file:
+  open_file.write('A string to write')
+
+An alternate way of writing the same code is like so:
+w - write only, r - read only, r+ - both
+
+  open_file = open('file_to_save.txt', 'w')
+  open_file.write('A string to write')
+  open_file.close()
+
+  this is generally bad practice. you also have to remember to close the file which
+    if you forget will leave in memory
+'''
+
+
+# import requests
+# url = 'https://www.nytimes.com/'
+# r = requests.get(url)
+# r_html = r.text
+
+# # print(r_html)
+# from bs4 import BeautifulSoup
+
+# soup = BeautifulSoup(r_html, features="html.parser")
+
+# title = soup.find('span', 'articletitle')
+# h3_elements = soup.find_all('h3')
+
+# # automatically closes file, w will overwrite file, must be string
+# with open('./Python/exercise21.txt', 'w') as open_file:
+#     for h3 in h3_elements:
+#         open_file.write(h3.getText() + '\n')
+  
+
+# 22 
+# import requests
+# url = 'https://www.practicepython.org/assets/nameslist.txt'
+# r = requests.get(url)
+# r_html = r.text.split('\n')
+# counter = {}
+
+# for line in r_html:
+#     counter[line] = (counter.get(line,0)) + 1
+# print(counter)
+
+#23
+# import requests
+# url = 'https://www.practicepython.org/assets/primenumbers.txt'
+# r = requests.get(url)
+
+# r_html = r.text.split('\n')
+
+# url2 = 'https://www.practicepython.org/assets/happynumbers.txt'
+# r1 = requests.get(url)
+# r_html2 = r.text.split('\n')
+
+# result = list(set(r_html) & set(r_html2))
+# print(result)
+
+# def filetolistofints(filename):
+# 	list_to_return = []
+# 	with open(filename) as f:
+# 		line = f.readline()
+# 		while line:
+# 			list_to_return.append(int(line))
+# 			line = f.readline()
+# 	return list_to_return
+
+# primeslist = filetolistofints('primenumbers.txt')
+# happieslist = filetolistofints('happynumbers.txt')
+
+# overlaplist = [elem for elem in primeslist if elem in happieslist]
+# print(overlaplist)
+
+
+
+# 24 Draw a Game Board
