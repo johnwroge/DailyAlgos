@@ -147,17 +147,155 @@ random_list_of_10  = [random.randint(0, 10) for _ in range(10)]
 
 #11 is prime
 
-number = input("Please enter a number" + "\n" + ">>>")
-number = int(number)
-prime = False #initiate boolean for true false, default false
-if number > 0:
-    for x in range (2, number - 1): #this range excludes number and 1, both of which number is divisible by
-        if number % x != 0: #If number isn't evenly divisible by x, start over with the next one
-            continue 
-        elif number % x == 0: #If number is evenly divisible by x, it can't be prime
-            sys.exit("The number is not prime.")
-    sys.exit("The number is prime.") #number wasn't evenly divisible by any x, so it's prime
-elif number == 0:
-    sys.exit("The number is not prime.") #According to the Google, 0 is not prime
-else:#if number is less than 0, the number is not prime (according to the Google).
-    sys.exit("The number is not prime.")
+# number = input("Please enter a number" + "\n" + ">>>")
+# number = int(number)
+# prime = False #initiate boolean for true false, default false
+# if number > 0:
+#     for x in range (2, number - 1): #this range excludes number and 1, both of which number is divisible by
+#         if number % x != 0: #If number isn't evenly divisible by x, start over with the next one
+#             continue 
+#         elif number % x == 0: #If number is evenly divisible by x, it can't be prime
+#             sys.exit("The number is not prime.")
+#     sys.exit("The number is prime.") #number wasn't evenly divisible by any x, so it's prime
+# elif number == 0:
+#     sys.exit("The number is not prime.") #According to the Google, 0 is not prime
+# else:#if number is less than 0, the number is not prime (according to the Google).
+#     sys.exit("The number is not prime.")
+
+def isPrime2(n1):
+    if num > 1:
+        # Iterate from 2 to n / 2
+        for i in range(2, int(num/2)+1):
+            # If num is divisible by any number between
+            # 2 and n / 2, it is not prime
+            if (num % i) == 0:
+                print(num, "is not a prime number")
+                break
+        else:
+            print(num, "is a prime number")
+    else:
+        print(num, "is not a prime number")
+
+def isPrime3(num):
+    divisor = 0
+    for i in range(2, num - 1):
+        if num % i != 0:
+            continue
+        elif num % i == 0:
+            return False
+    return True
+
+# print(isPrime3(5))
+
+# 12
+l1 = [1,2,3,4,5]
+l2 = [l1[0],len(l1) - 1]
+
+# 13
+def fib(n):
+    cache = [1,1,2] 
+
+    for i in range(3, n):
+        cache.append(cache[i - 1] + cache[i - 2])
+    return cache
+
+# 14 list remove duplicates
+
+def removeDupes(l1):
+    # return set(l1)
+    l3 = []
+    for item in l1: 
+        if not item in l3: l3.append(item)
+    return l3
+
+
+# print(removeDupes([11,22,33,33,22]))
+
+# 15 
+def reverseString(st1):
+    return ' '.join(reversed(st1.split(' ')))
+
+# print(reverseString('I am okay today are you'))
+
+
+#16
+s = "abcdefghijklmnopqrstuvwxyz01234567890ABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%^&*()?"
+passlen = 8
+p =  "".join(random.sample(s,passlen ))
+
+#17 Wow, using beautiful soup to get h3 titles from web page
+
+import requests
+url = 'https://www.nytimes.com/'
+r = requests.get(url)
+r_html = r.text
+
+# print(r_html)
+from bs4 import BeautifulSoup
+
+soup = BeautifulSoup(r_html, features="html.parser")
+
+title = soup.find('span', 'articletitle')
+h3_elements = soup.find_all('h3')
+
+# Print the text content of each <h3> element
+# for h3 in h3_elements:
+    # print(h3.text)
+
+# 18 cows and bulls
+
+def Cows_Bulls(): 
+    target = random.randint(1000, 9999)
+    target_list = [char for char in str(target)]
+    # print(target_list)
+    guess = 0
+    while guess != target:
+        bulls,cows = 0,0
+        print('Enter a four digit number')
+        guess = input('>>>  ')
+        cand = [char for char in guess]
+        for i in range(len(guess)):
+            if target_list[i] == cand[i]:
+                cows += 1
+            elif target_list[i] != cand[i] and cand[i] in target_list:
+                bulls += 1
+        print(f' {cows} cow,  {bulls} bull')
+        if cows == 4:
+            print(f'You win! The number was {target}')
+                
+# Cows_Bulls()
+
+# 19 Decode a webpage 2
+
+# import requests
+# from bs4 import BeautifulSoup
+
+# base_url = "http://www.vanityfair.com/society/2014/06/monica-lewinsky-humiliation-culture"
+# r = requests.get(base_url)
+# soup = BeautifulSoup(r.text, "html.parser")
+# a1 = soup.html.find_all('p')
+
+
+# for elem in a1:
+#     print(elem.text + '\n')
+
+
+#20 binary search
+
+def binarySearch(nums, target):
+    l, r = 0, len(nums) - 1
+
+    while l <= r:
+        mid = (l + r)//2
+        if nums[mid] > target:
+            r = mid - 1
+        elif nums[mid] < target:
+            l = mid + 1
+        else:
+            return True, mid
+    return False
+# print(binarySearch([1,3,5,7,8,9], 3))
+
+
+# 21
+
