@@ -9,6 +9,9 @@ If a cell is not alive, surrounded by 3 active cells, it comes to life
 steps:
 pip install pygame
 pip install numpy
+
+to run, cd into python directory then `python GameOfLife.py`
+
 '''
 
 # 

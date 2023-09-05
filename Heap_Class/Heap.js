@@ -74,7 +74,7 @@ class MaxBinaryHeap {
             //reassign the index to be the swap index; 
             index = swap; 
         }
-
+    }
 }
 
 let heap = new MaxBinaryHeap()

@@ -383,3 +383,233 @@ w - write only, r - read only, r+ - both
 
 
 # 24 Draw a Game Board
+# 2 n + 1 rows, and cols
+
+def gameBoard(n):
+
+    oddRow = ""
+    evenRow = ""
+    for i in range(n + 1):
+        if i == 0:
+            evenRow += " "
+            oddRow += "|"
+        else: 
+            evenRow += "-"
+            oddRow += " "
+    
+    isOdd = True
+    for i in range(2 * n + 1):
+        row = ""
+        if isOdd:
+            for r in range(n):
+                row += evenRow
+            print(row)
+            isOdd = False
+        else:
+            for r in range(n + 1):
+                row += oddRow
+            print(row)
+            isOdd = True
+
+# print(gameBoard(3))
+# 25
+
+def guessGame2():
+    l,r = 0, 100
+    nums = [x for x in range(1, 101)]
+    while l <= r:
+        mid = (l + r)//2
+        guess = input(f"Is your number, {nums[mid]}? (Enter Y/N)")
+        if guess == "Y":
+            return f"your number is {nums[mid]}"
+        if guess == "N": 
+            confirm = input(f"Is your number greater than {nums[mid]}? (Enter Y/N)")
+        
+        if confirm == "Y":
+            l = mid + 1
+        else:
+            r = mid - 1
+        
+    
+# guessGame2()
+# 26 Check for winner
+
+def checkGame(grid):
+    winner = False
+    # check rows, cols
+    hash = {1: 'Player 1', 2: 'Player 2'}
+    for i in range(len(grid)):
+        if grid[i][0] == grid[i][1] == grid[i][2] and grid[i][0] != 0:
+            winner = hash[grid[i][0]]
+            return True, winner
+        elif grid[0][i] == grid[1][i] == grid[2][i] and grid[0][i] != 0:
+            winner = hash[grid[0][i]]
+            return True, winner
+    if grid[0][0] == grid[1][1] == grid[2][2] and grid[1][1] != 0:
+        winner = hash[grid[0][0]]
+        return True, winner
+    if grid[2][0] == grid[1][1] == grid[2][0] and grid[1][1] != 0:
+        winner = hash[grid[2][0]]
+        return True, winner
+    return False, False
+        
+            
+# winner_is_2 = [[2, 2, 0],
+# 	[2, 1, 0],
+# 	[2, 1, 1]]
+
+# winner_is_1 = [[1, 2, 0],
+# 	[2, 1, 0],
+# 	[2, 1, 1]]
+
+# winner_is_also_1 = [[0, 1, 0],
+# 	[2, 1, 0],
+# 	[2, 1, 1]]
+
+# no_winner = [[1, 2, 0],
+# 	[2, 1, 0],
+# 	[2, 1, 2]]
+
+# also_no_winner = [[1, 2, 0],
+# 	[2, 1, 0],
+# 	[2, 1, 0]]
+        
+# print(checkGame(also_no_winner))               
+
+    
+def tic_tac_toe():
+    board = [[0,0,0],[0,0,0],[0,0,0]]
+    winner, player = False, False
+    turn = 0
+    while not winner:
+        if turn % 2 == 0:
+            print('Hi Player 1, enter your box as row,col: ')
+            play = input('>>>   ')
+            sRow, sCol = play.split(',')
+            board[int(sRow)][int(sCol)] = 1
+        elif turn % 2 == 1:
+            print('Hi Player 2, enter your box as row,col: ')
+            play = input('>>>   ')
+            sRow, sCol = play.split(',')
+            board[int(sRow)][int(sCol)] = 2
+        result, player = checkGame(board)
+        turn += 1
+        if result: 
+            winner = True
+    print(f"{player} won the game! Great Job!")
+    return
+
+# tic_tac_toe()
+        
+
+
+#30
+
+import requests
+import random 
+
+url = 'http://norvig.com/ngrams/sowpods.txt'
+r = requests.get(url)
+r_html = r.text.split('\n')
+
+
+def getWord():
+    random_item = random.choice(r_html)
+    return random_item
+def hangMan(): 
+    word, count, chances = getWord(), 0, 6
+    charList, guesses = list(word), ['_' for _ in range(len(word))]
+    gameOver = False
+    print('Welcome to Hangman!')
+    print(' '.join(guesses))
+    while not gameOver:
+        print('Enter your letter as a guess:  ')
+        val = input('>>>    ')
+        if val in charList:
+            toChange = [i for i, char in enumerate(charList) if char == val]
+            for index in toChange:
+                guesses[index] = val
+                count += 1
+        else: 
+            chances -= 1
+            print('Chances remaining! ',chances)
+        print(' '.join(guesses))
+        if chances == 0:
+            print('You lose, try again')
+            break
+        if count == len(word):
+            print('You won and are going to be great in life')
+            break
+# hangMan()
+# a,b = 1, 2
+# print("my number is {} and his number is {}".format(a, b))
+
+# 32 
+
+import json
+
+info_about_me = {
+    "name": "Michele",
+    "has_a_dog": False
+}
+
+
+with open("info.json", "w") as f:
+    json.dump(info_about_me, f)
+
+with open("info.json", "r") as f:
+    info = json.load(f)
+  
+            
+# dictionaries....
+
+
+# 36 Plotting graphs!!
+
+from bokeh.plotting import figure, show, output_file
+
+
+# output_file("plot.html")
+
+# # load our x and y data
+# x = [10, 20, 30]
+# y = [4, 5, 6]
+
+# # create a figure
+# p = figure()
+
+# # create a histogram
+# p.vbar(x=x, top=y, width=0.5)
+
+# # render (show) the plot
+# show(p)
+            
+output_file("plot.html")
+x_categories = ["a", "b", "c", "d", "e"]
+x = ["a", "d", "e"]
+y = [4, 5, 6]
+
+p = figure(x_range=x_categories)
+p.vbar(x=x, top=y, width=0.5)
+
+# show(p)
+
+
+# List comprehension
+
+words = ["auto","car", "anger", "fox", "anchor"]
+
+words = [word.upper() if word.startswith('a') else word for word in words]
+# print(words)
+
+# F strings
+
+name = "John"
+age = 25
+
+# print("helllo my name is "+ name + " and I am " + str(age) + " years old")
+# print("helllo my name is %s and I am %d years old" %(name, age))
+# print("helllo my name is {} and I am {} years old".format(name, age))
+# print(f"helllo my name is {name} and I am {age} years old")
+
+
