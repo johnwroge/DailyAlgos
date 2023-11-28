@@ -43,3 +43,22 @@ console.log(binToDec('101')) //-> 5
 console.log(binToDec('0101')) //-> 5
 
 module.exports = {binToDec};
+
+function busSchedule(arr, timeGiven) {
+    let timenow = parseInt(timeGiven.substring(0,2)) * 60
+    let res = 0
+    arr.sort((a,b) => a -  b)
+    let time = []
+    for (let s of arr){
+        let val = parseInt(s.substring(0,2)) * 60 + parseInt(s.substring(3))
+        time.push(val)
+    }
+
+    for (let i = time.length - 1; i > 0; i--){
+        if (timenow > time[i]){
+            return timenow - time[i]
+        }
+    }
+
+
+}

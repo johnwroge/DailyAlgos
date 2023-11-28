@@ -26,77 +26,45 @@ minmachines = 3
 '''
 
 import heapq
+MAX = 100001
 
-def tasks(tasksList):
-    optimalMachines = 0
-
-    machinesAvailable = []
-    tasksQueue = []
-
-    for task in tasksList:
-        tasksQueue.append([task[0], task[1]])
-
-    tasksQueue.sort(key=lambda x: x[0])
-
-    while tasksQueue:
-        task = tasksQueue.pop(0)
-        machineInUse = None
-
-        if machinesAvailable and task[0] >= machinesAvailable[0][0]:
-            machineInUse = heapq.heappop(machinesAvailable)
-            machineInUse = [task[1], machineInUse[1]]
+def tasks(start, end):
+    tasks_list = [(s,e) for s,e in zip(start, end)]
+    optimal_machines = 0
+    machines_available = []
+    heapq.heapify(tasks_list)
+    while tasks_list:  
+        task = heapq.heappop(tasks_list)
+        if machines_available and task[0] >= machines_available[0][0]:
+            machine_in_use = heapq.heappop(machines_available)
+            machine_in_use = (task[1], machine_in_use[1])
         else:
-            optimalMachines += 1
-            machineInUse = [task[1], optimalMachines]
+            optimal_machines += 1
+            machine_in_use = (task[1], optimal_machines)
+        heapq.heappush(machines_available, machine_in_use)
+    return optimal_machines
 
-        heapq.heappush(machinesAvailable, machineInUse)
+def minHalls(start, end) :
+    tasks_list = [[s,e] for s,e in zip(start, end)]
+    prefix_sum = [0] * MAX
+    n = len(start)
 
-    return optimalMachines
+    for i in range(n) :
+        prefix_sum[tasks_list[i][0]] += 1
+        prefix_sum[tasks_list[i][1] + 1] -= 1
+         
+    ans = prefix_sum[0]
+
+    for i in range(1, MAX) :
+        prefix_sum[i] += prefix_sum[i - 1]
+        ans = max(ans, prefix_sum[i])
+         
+    return ans; 
 
 # Driver code
-inputs = [
-    [
-        [1, 1],
-        [5, 5],
-        [8, 8],
-        [4, 4],
-        [6, 6],
-        [10, 10],
-        [7, 7]
-    ],
-    [
-        [1, 7],
-        [1, 7],
-        [1, 7],
-        [1, 7],
-        [1, 7],
-        [1, 7]
-    ],
-    [
-        [1, 7],
-        [8, 13],
-        [5, 6],
-        [10, 14],
-        [6, 7]
-    ],
-    [
-        [1, 3],
-        [3, 5],
-        [5, 9],
-        [9, 12],
-        [12, 13],
-        [13, 16],
-        [16, 17]
-    ],
-    [
-        [12, 13],
-        [13, 15],
-        [17, 20],
-        [13, 14],
-        [19, 21],
-        [18, 20]
-    ]
-]
+input1 = [1,8,3,9,6]
+input2 = [7,9,6,14,7]
+print(minHalls(input1,input2))
 
 # for i, inputTaskList in enumerate(inputs):
 #     print(f"{i + 1}. Task = {inputTaskList}")
@@ -122,4 +90,4 @@ def staircase(n):
     
         numSpace -= 1
         numStars += 1
-print(staircase(5))
+# print(staircase(5))
