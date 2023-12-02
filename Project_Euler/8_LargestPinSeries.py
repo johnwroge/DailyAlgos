@@ -28,6 +28,9 @@ Find the thirteen adjacent digits in the 1000-digit number that have the
 greatest product. What is the value of this product?
 '''
 
+from functools import reduce
+from operator import mul
+
 with open('/Users/johnwroge/DailyAlgos/Project_Euler/8_number.txt') as f:
     commands = f.readlines()
 
@@ -36,8 +39,8 @@ new_array1 = list(result)
 
 
 # Assuming your list is named new_array
-new_array = [item.replace('\n', '') for item in new_array1 if item.strip()]
-
+new_array2 = [item.replace('\n', '') for item in new_array1 if item.strip()]
+new_array = [int(item) for item in new_array2]
 # Print the result
 
 
@@ -52,14 +55,16 @@ l = 0
 
 for i in range(12, len(new_array)):
     print(new_array[i], new_array[l], product)
-    product *= int(new_array[i])
+    product *= new_array[i]
 
     if product > maxProduct:
         maxProduct = product
 
     # Check if the value at index 'l' is not "0" before dividing
-    if new_array[l] != "0":
-        product /= int(new_array[l])
+    if new_array[l] == 0:
+        product = reduce(mul, new_array[l + 1: i + 1])
+    if new_array[l] != 0:
+        product /= new_array[l]    
 
     # Increment 'l'
     l += 1
