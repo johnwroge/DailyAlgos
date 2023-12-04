@@ -1,4 +1,7 @@
 
+import math
+
+
 def uniquePaths(m: int, n: int) -> int:
     row = [1] * n
     for i in range(m - 1):
@@ -8,7 +11,9 @@ def uniquePaths(m: int, n: int) -> int:
         row = new_row
     return row[0]
 
-print(uniquePaths(3,2))
+
 
 def uniquePaths2(m, n):
     return math.comb(m + n - 2, m - 1)
+
+print(uniquePaths2(3,2))

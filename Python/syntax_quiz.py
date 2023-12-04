@@ -122,5 +122,11 @@ my_deque = collections.deque([1, 2, 3, 4, 5])
 
 # convert string in binary to number
 
+# take the product of a list of numbers
+
+# rotate a 2d grid by 90degrees
+# https://stackoverflow.com/questions/8421337/rotating-a-two-dimensional-array-in-python
+
+
 
 
