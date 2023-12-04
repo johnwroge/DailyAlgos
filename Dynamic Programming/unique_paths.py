@@ -9,3 +9,6 @@ def uniquePaths(m: int, n: int) -> int:
     return row[0]
 
 print(uniquePaths(3,2))
+
+def uniquePaths2(m, n):
+    return math.comb(m + n - 2, m - 1)
