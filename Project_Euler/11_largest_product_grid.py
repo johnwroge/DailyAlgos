@@ -85,6 +85,17 @@ print(find_products(rotated))
 
 # print(rotated)
 
+import numpy as np
+
+def find_diagonal_product(grid):
+    a = np.matrix(grid)
+    prod_diag = a.diagonal().prod()
+    return prod_diag
+
+for line in grid:
+    
+
+
 
 
     
