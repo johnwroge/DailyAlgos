@@ -143,7 +143,10 @@ def get_left():
     max_left = max(all_products)
     return max_left
 
-print(max(get_horizontal(), get_left(), get_right(), get_vertical()))
+get_horizontal()
+get_left()
+get_right()
+print(get_vertical()) 
     
 
 
