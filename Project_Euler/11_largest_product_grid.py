@@ -80,19 +80,70 @@ def find_products(grid):
  
 
 rotated = list(zip(*grid[::-1]))
-print(find_products(grid))
-print(find_products(rotated))
+# print(find_products(grid))
+# print(find_products(rotated))
 
 # print(rotated)
 
 import numpy as np
 
-def find_diagonal_product(grid):
-    a = np.matrix(grid)
-    prod_diag = a.diagonal().prod()
-    return prod_diag
+# def find_diagonal_product(grid):
+#     a = np.matrix(grid)
+#     prod_diag = a.diagonal().prod()
+#     return prod_diag
 
-for line in grid:
+# for line in grid:
+
+grid = np.loadtxt("/Users/johnwroge/DailyAlgos/Project_Euler/11_nums.txt")
+all_products = []
+
+def get_horizontal():
+    for i in range(20):
+        start, finish = 0, 4
+        while finish <= 20:
+            four_elements = grid[i, start:finish]
+            all_products.append(np.prod(four_elements))
+            start += 1
+            finish += 1
+    max_horizontal = max(all_products)
+    return max_horizontal
+
+def get_vertical():
+    for i in range(20):
+        start, finish = 0, 4
+        while finish <= 20:
+            four_elements = grid[start:finish, i]
+            all_products.append(np.prod(four_elements))
+            start += 1
+            finish += 1
+    max_horizontal = max(all_products)
+    return max_horizontal
+
+def get_right():
+    for i in range(-16, 16):
+        dgnl = np.diagonal(grid, i)
+        start, finish = 0, 4
+        while finish <= len(dgnl):
+            four_elements = dgnl[start:finish]
+            all_products.append(np.prod(four_elements))
+            start += 1
+            finish += 1
+    max_right = max(all_products)
+    return max_right
+
+def get_left():
+    for i in range(-16, 16):
+        dgnl = np.diagonal(np.flipud(grid), i)
+        start, finish = 0, 4
+        while finish <= len(dgnl):
+            four_elements = dgnl[start:finish]
+            all_products.append(np.prod(four_elements))
+            start += 1
+            finish += 1
+    max_left = max(all_products)
+    return max_left
+
+print(max(get_horizontal(), get_left(), get_right(), get_vertical()))
     
 
 

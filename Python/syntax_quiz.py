@@ -1,16 +1,17 @@
 '''
 quiz for syntax
 '''
+import collections
+import heapq
+import math
+thing = [1,2,3]
+list2 = [2,3,5,6]
 
 # add an element to a specific index in an array
 
 # append item to list
 
 # remove item from list
-import collections
-
-
-list1 = [1,2,3]
 
 # remove item at index
 
@@ -25,8 +26,6 @@ list1 = [1,2,3]
 # reverse a list and return new list
 
 # create a new list of list1 and list 2
-list2 = [4,5,6]
-list3 = list1 + list2
 
 # modify list 1 to contain items from list2
 
@@ -34,7 +33,9 @@ list3 = list1 + list2
 
 ''' Are strings mutable in python? '''
 
-# reverse a string ***
+# reverse a string using a list***
+
+# reverse a string using slices***
 
 # change number to string
 
@@ -53,14 +54,13 @@ list3 = list1 + list2
 # remove white space from string
 thing = '  a  b  c'
 thing2 = 'def'
-
 # concatenate two string use literal syntax
 
 # concatenate two strings use operator
 
 # create an adjacency list using a library with both a list and a set 
 
-'''what is the difference in time and space complexity'''
+'''what is the difference in time and space complexity for operations in a list and a set?'''
 
 # create an adjacency list using dictionary comprehension
 edges = [[1,3],[3,4],[5,6],[8,9]]
@@ -83,7 +83,6 @@ deque.popleft()
 
 # rotate a list by k 
 
-my_deque = collections.deque([1, 2, 3, 4, 5])
 
 # create new list of 2d array sorted by 1st element
 
@@ -95,6 +94,8 @@ my_deque = collections.deque([1, 2, 3, 4, 5])
 
 # create a new dictionary from list of tuples
 
+# What happens if you have a duplicate key?
+
 # get dictionaries keys
 
 # get dic values
@@ -102,7 +103,8 @@ my_deque = collections.deque([1, 2, 3, 4, 5])
 # get dict view object
 
 # remove item at particular key and return its value
-
+new_obj = {1:2, 3:4, 5:6}
+new_obj2 = {1: 3, 6:7, 8:9, 9:10}
 # remove all items from dictionary
 
 # get a particular value at a key
@@ -111,16 +113,28 @@ my_deque = collections.deque([1, 2, 3, 4, 5])
 
 # remove a value
 
+'''
+Heaps
+'''
+
 # create a minimum heap from a list of numbers
+list1 = [2,3,5,6]
+heapq.heapify(list1)
 
 # create a maximum heap from list of numbers
+
+'''
+Sets
+'''
 
 # create a set 
 
 
 # create new array of length n filled with 0
 
-# convert string in binary to number
+# convert string in binary to number (remember what to include?)
+bin_string = '1010101010'
+
 
 # take the product of a list of numbers
 
@@ -128,5 +142,7 @@ my_deque = collections.deque([1, 2, 3, 4, 5])
 # https://stackoverflow.com/questions/8421337/rotating-a-two-dimensional-array-in-python
 
 
+# what is the difference between a tuple, list and object? 
 
 
+# iterate over key val pairs in dictionary and return a list of these

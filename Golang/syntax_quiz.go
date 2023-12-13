@@ -10,10 +10,32 @@ for installing a self-contained go program.
 package main
 
 import (
-	// "fmt"
-
+	"fmt"
+	"strings"
 )
 
 func main(){
+
+	// iterate over characters of abs and print to console
+	test_string := "abc"
+
+	for i, c := range test_string {
+		fmt.Println(i, string(c))
+	}
+
+	test_sentence := strings.Fields("i am relearning go")
+	// iterate over words and print to console
+	for i, word := range test_sentence {
+		fmt.Println(i, "-> ",word)
+	}
+
+	// change the test_string to a rune slice
+
+	runes := []rune(test_string)
+
+	// reverse the order of test_string
+	for i, r := range runes {
+		fmt.Println(i, string(r))
+	}
 
 }
