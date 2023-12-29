@@ -171,7 +171,7 @@ arr = [1,2,3,4,5,6,7,8,9,10]
 
 # what is the difference between a tuple, list and object? 
 
-# tuple is immutable so it requires less space
+
 
 # iterate over key val pairs in dictionary and return a list of these
 
