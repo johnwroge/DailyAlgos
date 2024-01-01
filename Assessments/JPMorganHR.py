@@ -49,7 +49,7 @@ def balancedOrNot(expressions, maxreplace):
                 stack.append(hashtable[c])
             elif stack and c == stack[-1]:
                 stack.pop()
-            else
+            else:
                 count += 1
         if count > maxreplace[i]:
             result.append(0)
