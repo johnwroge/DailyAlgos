@@ -44,22 +44,57 @@ def tasks(start, end):
         heapq.heappush(machines_available, machine_in_use)
     return optimal_machines
 
+# https://www.geeksforgeeks.org/minimum-halls-required-for-class-scheduling/
 def minHalls(start, end) :
-    tasks_list = [[s,e] for s,e in zip(start, end)]
+    # tasks_list = [[s,e] for s,e in zip(start, end)]
     prefix_sum = [0] * MAX
     n = len(start)
 
     for i in range(n) :
-        prefix_sum[tasks_list[i][0]] += 1
-        prefix_sum[tasks_list[i][1] + 1] -= 1
+        prefix_sum[start[i]] += 1
+        prefix_sum[end[i] + 1] -= 1
          
     ans = prefix_sum[0]
 
     for i in range(1, MAX) :
         prefix_sum[i] += prefix_sum[i - 1]
         ans = max(ans, prefix_sum[i])
-         
+    
     return ans; 
+
+
+# Python implementation of the above approach
+from typing import List
+ 
+# Function to return the minimum
+# number of halls required
+def minHalls2(lectures: List[List[int]], n: int) -> int:
+ 
+    # Initialize a list of tuples, Time, first value
+    # indicates the time of entry or exit of a lecture
+    # second value denotes whether the lecture starts
+    # or ends
+    Time = []
+ 
+    # Store the lecture times
+    for i in range(n):
+        Time.append((lectures[i][0], 1))
+        Time.append((lectures[i][1], -1))
+ 
+    # Sort the list
+    Time.sort(key=lambda x: x[0])
+ 
+    answer = 0
+    sum = 0
+ 
+    # Traverse the Time list and Update sum and
+    # answer variables
+    for i in range(len(Time)):
+        sum += Time[i][1]
+        answer = max(answer, sum)
+ 
+    # Return the answer
+    return answer
 
 # Driver code
 input1 = [1,8,3,9,6]
