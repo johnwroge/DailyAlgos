@@ -147,6 +147,24 @@ Sets
 
 # create a set 
 
+# convert a list of numbers to a set
+
+# set operations:
+
+# union |
+
+
+# intersection & or intersection()
+
+# difference - or difference()
+
+# symmetric difference
+
+# subset <= issubset()
+
+# superset >= issuperset()
+# 
+# 
 
 # create new array of length n filled with 0
 
