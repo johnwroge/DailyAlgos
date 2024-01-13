@@ -193,3 +193,19 @@ arr = [1,2,3,4,5,6,7,8,9,10]
 
 # iterate over key val pairs in dictionary and return a list of these
 
+
+
+# create a list of tuples of the rows of a graph
+
+# iterate over the columns of a graph using unpacking operator
+grid = [[3,1,2,2],[1,4,4,5],[2,4,2,2],[2,4,2,2]]
+
+for tpl in zip(*grid):
+    print(tpl)
+
+# use built in binary search to determine index position in iterable
+
+import bisect 
+nums5 = [1,3,5,7,9]
+
+# print(bisect.bisect(nums5, 6))
