@@ -50,7 +50,7 @@ class Node:
         self.left = left
         self.right = right
 
-from collections import deque
+from collections import defaultdict, deque
 from typing import Optional
 
 def array_to_binary_tree(lst):
@@ -81,18 +81,33 @@ Use BFS starting at the start node to find the distance between
 '''
 class Solution:
     def amountOfTime(self, root: Optional[Node], start: int) -> int:
-        if root.val == start:
-            return 0
-        adjList = {}
-        Q = [root]
-        while Q:
-            curr = Q.pop(0)
-            if curr != None:
-                adjList[curr.val] = [curr.left, curr.right]
-                if curr.left:
-                    Q.append(curr.left)
-                if curr.right:
-                    Q.append(curr.right)
+        def dfs(node):
+            if node is None:
+                return
+            if node.left:
+                graph[node.val].append(node.left.val)
+                graph[node.left.val].append(node.val)
+            if node.right:
+                graph[node.val].append(node.right.val)
+                graph[node.right.val].append(node.val)
+            dfs(node.left)
+            dfs(node.right)
+
+        graph = defaultdict(list)
+        dfs(root)
+        visited = set()
+        queue = deque([start])
+        time = -1
+        while queue:
+            time += 1
+            for _ in range(len(queue)):
+                current_node = queue.popleft()
+                visited.add(current_node)
+                for neighbor in graph[current_node]:
+                    if neighbor not in visited:
+                        queue.append(neighbor)
+        return time
+
         
     
        
