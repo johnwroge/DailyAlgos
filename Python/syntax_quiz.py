@@ -5,7 +5,7 @@ import collections
 import heapq
 import math
 thing = [1,2,3]
-list2 = [2,3,5,1,0,2,22]
+list2 = [2,3,5,1,0,2,22]# what is the difference between a tuple, list and object? 
 
 # add an element to a specific index in an array
 # list2.insert(0,22)
@@ -168,13 +168,35 @@ Sets
 
 # create new array of length n filled with 0
 
+
 # convert string in binary to number (remember what to include?)
 bin_string = '1010101010'
 num = int(bin_string, 2)
-# print(num)
+
+
 # find the intersection of 2 sets
 
+# set1.intersection(set2)
 
+
+# Math 
+
+n = 536870912
+
+# take the logarithm of a number
+
+# base e
+math.log(x)
+# base 10
+math.log10(x, 10)
+# base 2
+math.log2(x)
+
+
+
+# use built in log 2 function to find log2 of number
+
+# check to see if number is an integer
 
 
 # take the product of a list of numbers
@@ -186,10 +208,15 @@ arr = [1,2,3,4,5,6,7,8,9,10]
 # rotate a 2d grid by 90degrees
 # https://stackoverflow.com/questions/8421337/rotating-a-two-dimensional-array-in-python
 
+rotated = list(zip(*original[::-1]))
+
+# https://stackoverflow.com/questions/41290350/inplace-rotation-of-a-matrix
 
 # what is the difference between a tuple, list and object? 
 
-
+'''
+tuple is immutable
+'''
 
 # iterate over key val pairs in dictionary and return a list of these
 
@@ -209,3 +236,10 @@ import bisect
 nums5 = [1,3,5,7,9]
 
 # print(bisect.bisect(nums5, 6))
+
+
+# Bit
+
+# Format a number to be a 32 bit integer with 0's
+
+n = format(n, '032b')

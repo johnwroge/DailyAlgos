@@ -7,6 +7,93 @@
 2. compile `javac TwoSum.java` which generates class file
 3. run file `java TwoSum`
 
+## Overview
+
+Each Java program must have a main method. And each main method contains
+parameters String[] args
+
+```java
+public class HelloWorld {
+    public static void main(String[] args){
+        System.out.println("Hello world, my name is " + args[0]);
+    }
+}
+```
+All arguments passed in command line are strings. 
+Java only has methods associated with classes and no functions. 
+
+## Printing
+
+```java
+System.out.print();
+System.out.println();
+
+
+```
+
+## Variables
+ 
+Data Type VaribleName = value;
+
+Primitive 
+int, double, boolean, char
+
+
+## Looping
+
+c style for loop 
+
+```java
+for (int i = 0; i <= myArray.length; i++) {
+  // Do something
+}
+
+// for each can be used in maps, collections, and arrays
+
+for (String s : myArray) {
+  // Do something
+}
+
+
+```
+
+## Methods
+
+public - can be accessed by any part of the program including classes
+static - can be called throughout program without creating an instance of class
+void - does not return a value
+
+
+## Parameters
+
+```java
+public static void exampleMethod(String greeting, String name) {
+  System.out.println(greeting + " " + name);
+}
+
+public static void main(String[] args) {
+  exampleMethod("Greetings", "Earthling"); // Prints: Greetings Earthling
+  exampleMethod("Hello", "World"); // Prints: Hello World
+  exampleMethod("Howdy", "Planet"); // Prints: Howdy Planet
+}
+
+```
+
+## Returning a value
+
+```java
+// Method will return an int value
+public static int findProduct(int num1, int num2) {
+  return num1 * num2;
+}
+public static void main(String[] args) {
+  int product = findProduct(3,4);
+  System.out.println(product); // Prints: 12
+}
+```
+
+## Arguments
+
 
 ## Syntax
 
