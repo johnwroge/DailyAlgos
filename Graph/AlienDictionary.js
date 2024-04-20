@@ -1,3 +1,5 @@
+
+
 function alienOrder(words){
     const adj = new Map();
     for (let i = 0; i < words.length; i++){

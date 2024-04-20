@@ -191,3 +191,7 @@ entrySet():
 
 Returns a Set view of the key-value mappings contained in the map.
 Set<Map.Entry<String, String>> entrySet = map.entrySet();
+
+## Set 
+
+add, remove, contains

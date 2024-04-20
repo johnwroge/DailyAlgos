@@ -11,23 +11,40 @@ list2 = [2,3,5,1,0,2,22]# what is the difference between a tuple, list and objec
 # list2.insert(0,22)
 
 
+# read from a file
+
+with open('filename.txt', 'r') as file:
+    lines = file.readlines()
+    print(lines)
+
+# append to a file
+
+with open('filename.txt', 'a') as file:
+    line = 'hi world'
+    file.write(line)
+
+
 # append item to list
+list2.append(2)
 
 # remove item from list
 
-
+list2.remove(2)
 # remove item at index
+index = 2
+list2.pop(index)
 
 
 # find index of 1st occurence
-# print(list2.index(2))
+list2.index(2)
 
 # find count of number of times item appears
 print(list2.count(3))
+
 # sort a list
 list2.sort()
 
-# reverse a list
+# sort a list in reversed order
 list2.sort(key=lambda x: x, reverse=True)
 
 # reverse a list and return new list
@@ -41,9 +58,11 @@ list3 = list2 + list2
 list2.extend(list2)
 
 # remove all elements from a list
-# list2.clear()
+list2.clear()
 
 ''' Are strings mutable in python? '''
+
+''' im not sure, strings are technically objects, and some objects are mutable, except for tuples'''
 
 # reverse a string using a list***
 s = 'abc'
@@ -53,25 +72,37 @@ t = ''.join(list(reversed(s)))
 t2 = s[::-1]
 
 # change number to string
+number = 100
+str(number)
 
-# change string to lowercase
+# change string to lowercase'
+string = 'HELLO'
+string.lower()
 
 # change string to uppercase
+string.upper()
 
 'What about upper or lowercase for matching?'
 
+'''
+i think it is case sensitive
+'''
+
 # replace parts of string with new 
+
+string.replace('something','newwords')
 
 # split a string by a separator
 s.split(' ')
 # split a string in a list of characters
-
+list(s)
 # remove white space from string
 thing = '  a  b  c'
 thing2 = 'def'
 # concatenate two string use literal syntax
-
+f"{thing}{thing2}"
 # concatenate two strings use operator
+thing + thing2
 
 # create an adjacency list using a library with both a list and a set 
 
